@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 // declared route that LISTENS for GET requests to the root URL ('/')
 // function returns a view called welcome, check resources/views/welcome.blade.php
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 // Ep2 (time 4:40) - added a new route for /about page
