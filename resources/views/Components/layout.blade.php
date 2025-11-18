@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html class="h-full bg-gray-100" lang="en">
+    <!-- The above class sets were required -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +20,15 @@
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-white/5 hover:text-white" -->
-              <a href="{{ route('home') }}" aria-current="page" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">Home</a>
+
+              <!-- Going to run conditional to check what page we are on, then apply stylings -->
+              <a
+                href="{{ route('home') }}"
+                aria-current="page"
+                class= "{{ false ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
+                    Home
+              </a>
+
               <a href="{{ route('about') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">About</a>
               <a href="{{ route('contact') }}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Contact</a>
             </div>
