@@ -6,12 +6,7 @@
     <title>Home Page</title>
 </head>
 <body>
-    <!-- Quick navigation, but I need to keep this DRY for each page -->
-    <nav>
-        <a href="/">Home</a> |
-        <a href="/about">About</a> |
-        <a href="/contact">Contact</a>
-    </nav>
-    <?php echo $slot ?>
+    {{ $slot }}
+    <!-- above translates to php echo $slot; -->
 </body>
 </html>
