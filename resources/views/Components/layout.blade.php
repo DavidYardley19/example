@@ -22,9 +22,9 @@
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-white/5 hover:text-white" -->
 
               <!-- Going to run conditional to check what page we are on, then apply stylings -->
-                <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
-                <x-nav-link href="about" :active="request()->is('about')">About</x-nav-link>
-                <x-nav-link href="contact" :active="request()->is('contact')">Contact</x-nav-link>
+                <x-nav-link href="/" :active="request()->is('/')" type="{{ request()->is('/') ? 'a' : 'button' }}">Home</x-nav-link>
+                <x-nav-link href="about" :active="request()->is('about')" type="{{ request()->is('about') ? 'a' : 'button' }}">About</x-nav-link>
+                <x-nav-link href="contact" :active="request()->is('contact')" type="{{ request()->is('contact') ? 'a' : 'button' }}">Contact</x-nav-link>
             </div>
           </div>
         </div>
