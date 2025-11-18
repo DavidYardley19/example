@@ -1,3 +1,14 @@
-<a {{ $attributes }}>{{ $slot }}</a>
-<!-- attributes is an object, you may wish to use {{ $attributes->merge(['class' => 'nav-link']) }} -->
- <!-- style is carried over if just calling all of attributes (set red to about link) -->
+<!-- => false is the default, the otherwise -->
+@props(['active' => false])
+<!-- The above is a blade directive
+ It will hide this when inspecting element in the browser
+    It also allows passing in an 'active' prop when calling the component
+    We will use this to determine which page we are on
+This is different from standard attributes passed in-->
+
+<!-- if active = true, run this stuff -->
+<a
+    class= "{{ $active ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}"
+    aria-current = "{{ $active ? 'page' : 'false' }}"
+    {{$attributes}}
+    >{{$slot}}</a>

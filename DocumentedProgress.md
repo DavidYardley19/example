@@ -50,3 +50,37 @@ Quick note: {{ $heading ?? $title ?? 'Dashboard' }}
 This is like a fallback method... if elseif else
 heading, question mark? no? ... title, question mark? no?... Alright. Here you go then, Dashboard.
     But I do not believe the last resort MUST be a string, surely it can be any process, method, function etc
+
+NO HOMEWORK
+
+## Ep 5 - Style the currently active navigation link
+class h-full means the full height is taken up
+
+The below line allows for conditional setting of styles. But need to decide what determines this true/false with the laravels request helper function (theres a method called 'is')
+                class= "{{ false ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
+
+aria-current > Essential for screenwriters
+    indicates if current link represents current page
+
+CURRENT CODE
+a class= "{{ request()->is('/') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}"
+    aria-current = "{{ request()->is('/') ? 'page' : 'false' }}"
+    {{$slot}}
+ISSUE
+This is only specific to the home page, need something a little more dynamic through the use of props
+    Something to indicate if nav link should be marked as the active nav link.
+        ATTRIBUTES (class id name)
+        PROPS (anything that isnt an attribute) -> Not echo'd 
+
+Adding {{attributes}} into an tag will allow you to see ALL attributes such as href, class, name, id 
+(when inspecting element)
+
+active="false" >> false is treated as a string
+:active="false" >> false is treated as a boolean
+
+HOMEWORK
+Introduce a new prop >
+    type
+        whether navlink should be rendered as an achor tag or button tag
+            conditional > if type = a > anchor tag
+                          if type = button > button tag

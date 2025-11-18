@@ -22,16 +22,9 @@
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-white/5 hover:text-white" -->
 
               <!-- Going to run conditional to check what page we are on, then apply stylings -->
-              <a
-                href="/"
-                class= "{{ request()->is('/') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
-                    Home</a>
-              <a href="about"
-                class= "{{ request()->is('about') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
-                    About</a>
-              <a href="contact"
-                class= "{{ request()->is('contact') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}">
-                    Contact</a>
+                <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
+                <x-nav-link href="about" :active="request()->is('about')">About</x-nav-link>
+                <x-nav-link href="contact" :active="request()->is('contact')">Contact</x-nav-link>
             </div>
           </div>
         </div>
