@@ -153,3 +153,40 @@ SUMMARY
 
 HOMEWORK
     no homework. Done plenty here!
+
+## Ep 7 - Autoloading, Namespaces and Models
+Going to start with the summary so I know what is coming up
+
+SUMMARY (PRE-STUDY)
+    Removed duplicated job data by centralizing in a Job model
+    Leant about MVC and role of the models
+    Used PSR-4 autoloading + namespaces (organises code)
+    Added a find method to the model (encapsulates data lookup)
+    Handled missing data gracefully (laravels abort(404) helper)
+
+Notes (PRE-STUDY)
+    moving array of jobs up one level in the routes file means...
+        it can be shared across multiple routes without duplication.
+        reduces redundancy while keeping data accessible
+    
+    Static method all() on a class will return an entire array (jobs in this class)
+    Encapsulation makes the data easier to manage and prepares us for adding behaviour and logic
+        string together a bunch of methods in one go, even (? possibly. ?)
+    (need to update all routes to use Job::all() instead of the duped array)
+
+    MVC and Models
+    Model - represents data and business logic (data persistence, business rules such as how jobs are created updated or deleted.)
+    View - Handles presentation, and user interface
+    Controller - Manages user input and interaction (shown as route handlers in laravel usually)
+
+    Adding a method to the job model-
+    Already moved logic for finding a job by ID into the job model as a static find method.
+        This uses Arr helper to find the first job matching a given ID (or returns null if not found)
+        Within the route, we replaced inline logic with a call to Job::find($id)
+    
+    Handling missing data (sad path)
+    If job with the requested ID does not exist,
+        find method returns null
+            handle this case with aborting with a 404 response (abort(404))
+                Laravels helper (abort) throw an exception
+                    Laravel catches and converts into a PROPPER 404 HTTP RESPONSE!!! CRAZY. maybe not
