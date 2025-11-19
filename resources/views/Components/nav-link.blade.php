@@ -15,17 +15,17 @@ This is different from standard attributes passed in-->
         Check the laracasts comments to see peoples qna's.
 -->
 
-<?php if ($type === 'a'): ?>
+@if ($type === 'a')
     <a
         class= "{{ $active ? 'bg-gray-900 text-white border-b-2' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}"
         aria-current = "{{ $active ? 'page' : 'false' }}"
         {{$attributes}}
         >{{$slot}}</a>
-<?php elseif ($type === 'button'): ?>
+@elseif ($type === 'button')
     <button
         class= "{{ $active ? 'bg-gray-900 text-white border-b-2' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}"
         aria-current = "{{ $active ? 'page' : 'false' }}"
         {{$attributes}}
         >{{$slot}}</button>
-<?php endif; ?>
+@endif
 
