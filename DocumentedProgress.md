@@ -190,3 +190,58 @@ Notes (PRE-STUDY)
             handle this case with aborting with a 404 response (abort(404))
                 Laravels helper (abort) throw an exception
                     Laravel catches and converts into a PROPPER 404 HTTP RESPONSE!!! CRAZY. maybe not
+
+## Ep 8 - Introduction to Migrations
+### SUMMARY (pre-study)
+Default db = sqlite. But can support other
+.env file manages config
+artisan commands manage migrations + db schema
+Migrations define db structure + support vers control
+TablePlus = great GUI for managing DB
+Created a migration for job_listings table > populated with sample data
+
+### Pre-Notes
+On laravel install- it asked which db you wanted, sqlite was default
+Suitable for many apps unless you expect a much larger scale app.
+config in .env file
+    Enviroment specific settings    
+        db creds, debug mode, cache drivers, api keys
+        PURPOSE: keeps sensitive info out of codebase and vers control
+
+Artisan Commands and DB migrations
+artisan = cli tool... all commands in cmd prompt start with 'php artisan'
+EXAMPLE COMMANDS
+    php artisan migrate
+        runs pending migrations to create or update db tables
+    php artisan migrate:refresh
+        rolls back migrations, runs them again (good for devmnt)
+    php artisan migrate:rollback
+        rollback to last batch of migrations
+migrations = php classes
+    define structure of db tables, allow vc db schema + share with others.
+
+TablePlus for DB management
+(recommended) GUI tool - manage DB's.
+Supports multiple DB types (e.g. sqlite, mysql, postgresql)
+Can connect tablePlus to sqlite db by pointing database/database.sqlite file
+    lets you inspect tables, view data, modify schema visually
+
+Understanding Migrations
+2 methods
+    up() >>> defines changes to apply
+        creating tables, adding columns
+    down() >>> defines how to revert changes
+        drop tables, rm columns
+EXAMPLE: migration to create job_listings
+    may include cols for id title salary
+        you can add/ mod columns by creating new migrations
+
+Creating and Running a Migration
+    php artisan make:migration
+    create_job_listings_table
+edit generated migration file to define table schema
+    then run php arisan migrate (apply migration to the table)
+
+Populating the database
+    records can be manually added using TablePlus or other DB clients
+        eg add job listings with titles and salaries
