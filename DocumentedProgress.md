@@ -84,3 +84,44 @@ Introduce a new prop >
         whether navlink should be rendered as an achor tag or button tag
             conditional > if type = a > anchor tag
                           if type = button > button tag
+
+RECAP
+Quick recap (19/11/25) - ep5
+bg-grey900, bg-grey100 ... 900 is darkest, 100 is lightest.
+    Conditionals were sorted to determine what to do with anchor tags stylings (with above colours bg-grey...)
+
+Used class="{{ request()->is()}}"
+    To check if theres a match with whats in the is (such as '/')
+        Then runs what comes after the question mark.
+            Alternative is what comes after the colon (an else section)
+
+Component added for nav-links... nav-link.blade.php
+    Then the a tags in the layouts component can change to x-nav-link
+
+aria-current="false"
+    Important for production apps, screenwriters - if current link represents current page or list of pages.
+    aria-current="{{request()->is('/') ? 'page' : 'false'}}"
+        TODO : check on what this really means. Still not clicking
+
+Attributes - html, href, id, class
+Props - anything that is not an attribute, 
+    Distinguished by specifying not to echo this out
+    HOW? Blade directive- @props(['active'])
+        This is an array so you dont need to keep writing @props.. just use that one
+    Can give default values, just incase its not passed in when referencing nav-link.
+        @props(['active'=>'false'])
+
+Differenciate between strings and booleans
+    'false' = string
+    :'false' = boolean
+        >> When prefixing prop names.
+
+Can also create a @php directive (with @endphp)
+    Within here, some conditionals can be set.
+    Tweak specific values
+    All is isolated in this component
+
+## Ep 6 - View Data and Route Wildcards
+
+Recap on homework from Ep 5
+

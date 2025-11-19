@@ -1,5 +1,5 @@
 <!-- => false is the default, the otherwise -->
-@props(['active' => false])
+@props(['active' => false, "type" => "a"])
 <!-- The above is a blade directive
  It will hide this when inspecting element in the browser
     It also allows passing in an 'active' prop when calling the component
@@ -14,13 +14,18 @@ This is different from standard attributes passed in-->
     Implement this conditional rendering inside the nav-link component
         Check the laracasts comments to see peoples qna's.
 -->
-@props(['type' => 'a'])
 
+<?php if ($type === 'a'): ?>
+    <a
+        class= "{{ $active ? 'bg-gray-900 text-white border-b-2' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}"
+        aria-current = "{{ $active ? 'page' : 'false' }}"
+        {{$attributes}}
+        >{{$slot}}</a>
+<?php elseif ($type === 'button'): ?>
+    <button
+        class= "{{ $active ? 'bg-gray-900 text-white border-b-2' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}"
+        aria-current = "{{ $active ? 'page' : 'false' }}"
+        {{$attributes}}
+        >{{$slot}}</button>
+<?php endif; ?>
 
-<!-- if active = true, run this stuff -->
-<a
-    class= "{{ $active ? 'bg-gray-900 text-white border-b-2' : 'text-gray-300 hover:bg-white/5 hover:text-white' }}"
-    class= "{{ $type === 'button' ? 'rounded-md px-3 py-2 text-sm font-medium' : 'px-3 py-2 text-sm font-medium' }}"
-    aria-current = "{{ $active ? 'page' : 'false' }}"
-    {{$attributes}}
-    >{{$slot}}</a>
