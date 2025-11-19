@@ -3,5 +3,5 @@
     <x-slot:heading>
         Home Page
     </x-slot:heading>
-    Hello from the home page!
+    {{ $greeting }} My name is {{ $name }}
 </x-layout>

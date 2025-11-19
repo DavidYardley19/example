@@ -2,5 +2,5 @@
     <x-slot:heading>
         Contact Page
     </x-slot:heading>
-    Hello from the contact page!
+    {{ $greeting }} My name is {{ $name }}
 </x-layout>
