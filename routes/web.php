@@ -2,28 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Arr;
-
-class Job {
-    public static function all() : array {
-        return [
-            [
-                'id' => 1,
-                'title' => 'Web Developer',
-                'salary' => '£50,000',
-            ],
-            [
-                'id' => 2,
-                'title' => 'Designer',
-                'salary' => '£60,000',
-            ],
-            [
-                'id' => 3,
-                'title' => 'Content Creator',
-                'salary' => '£70,000',
-            ]
-        ];
-    }
-}
+use App\Models\Job;
+// The above is case sensitive!
 
 Route::get('/', function () {
     return view('home', [
