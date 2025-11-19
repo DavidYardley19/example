@@ -125,3 +125,31 @@ Can also create a @php directive (with @endphp)
 
 Recap on homework from Ep 5
 
+Learnt how to pass data into views.
+    eg. 'greeting' => 'Hello'
+Complex data could be passed in.
+    'jobs' => [['id => 1, 'title' => 'jobA'],[same again],[same again]]
+
+@foreach directive used to loop over the jobs
+
+Dynamic job listings pages set up
+    Created a new Route::get for ("jobs/{id}")
+    A $jobs variable was passed in allong with a collect() method (helper) to create a collection from the array
+        the first() method with a callback meant we could find the job by the ID
+This was tidied up nicely however with the following line
+    fn ($job) => $job['id] == $id
+
+A new view created: job.blade.php
+    this displayed details
+    Each title was made clickable and styling appended for visual clarity of UX
+
+SUMMARY
+    Conditionally render anchor or button tags (props)
+    Passed data (arrays) from routes to views
+    Loop over arrays using blade directive @foreach
+    Dynamic routes with URL params
+    Laravel collections and closures to find array items
+    Built individual details pages linked from a list
+
+HOMEWORK
+    no homework. Done plenty here!
