@@ -387,3 +387,16 @@ Migrations allow to define and modify db schema in php
     used to vers control and share with team.
 
 ### Additional notes
+ORM - object relational mapper
+    maps rows to objects
+        single record being represented in code
+(may be known as an active record)
+
+Laravel and Eloquent rely on conventions over configuration!
+after a dd() for an eloquent model class
+    you can click on an instance (row) then check out attributes
+        to see its data
+Can index too like you normally would ```jobs[0]```
+To grab one value, use the following
+```jobs[0]->salary```
+Note: you dont need quotes for attribute names

@@ -14,5 +14,10 @@ use Illuminate\Database\Eloquent\Model;
     // such as Job::all() to get all jobs from jobs table.
         // or Job::find($id) to get a job by its primary key.
 class Job extends Model {
-
+    // note eloquent assumes there is a table called 'jobs' in the database.
+    // We actually have a table called 'job_listings'.
+    // So we need to specify the table name.
+    protected $table = 'job_listings';
+    // Otherwise just rename the class to JobListing to match the table name.
+        // Eloquent uses plural form of class name as table name by default.
     }
