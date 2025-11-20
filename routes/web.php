@@ -6,8 +6,10 @@ use App\Models\Job;
 
 Route::get('/', function () {
     return view('home', [
-    'greeting' => 'Hello, welcome to the home page!', // access to a variable $greeting
-    'name' => 'DavBot',
+    $jobs = Job::all();
+    dd($jobs);
+    // 'greeting' => 'Hello, welcome to the home page!',
+    // 'name' => 'DavBot',
     ]);
 })->name('home');
 
