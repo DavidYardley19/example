@@ -245,3 +245,47 @@ edit generated migration file to define table schema
 Populating the database
     records can be manually added using TablePlus or other DB clients
         eg add job listings with titles and salaries
+
+### Notes
+If you created an app without using 'laravel new' command
+    You can use php artisan migrate
+Going to delete the db to see this work.
+    Well.. I'm going to back it up somewhere (out of pure fear)
+added :fresh to the end, unsure what happened but all is well.
+Downloaded tableplus > db management gui
+    Easy to set up, all I had to do was know the filepath for the db
+        /database/database.sqlite (this project)
+
+Checked out the migrations dir under /database
+    long file names as they incl the timestamp
+Migrations great for sharing code with teammates.
+    NEVER RUN php migrate: refresh in production (this drops a lot of data)
+Migrate rollback - latest or most recent migration
+    could have migrations to make, drop tables
+        or add/rm columns... they can be actions that can be performed on a db
+
+If things dont update in tableplus
+    try to close and load up the connection again.
+
+Making my own migration
+php artisan make:migration
+give a suitable name for the action to be taken
+check out the file and add whatever you need for the Up/Down methods
+    Up = changes
+    down = reversions? is that a word... what to do to rollback
+Now all you need to do is migrate... nothing appended to the end
+        
+        In cmd: output:
+            INFO  Running migrations.
+
+            2025_11_20_202415_create_job_listings_table ...................................................... 6.47ms DONE
+
+There seems to be a paywall now with the tableplus app... I'm under the free version which wont let me check out a table I just added during a migration.
+May have to stick to a vscode extension.
+Really sad about that... I liked the gui of tableplus
+but forking out 99 dollar right now is not at the top of my priority list.
+shame.
+
+UPDATE:
+I am dumb as hell.
+There are tabs in tableplus... you just have a limit of 3 tabs open at any given time : e.g. tables
