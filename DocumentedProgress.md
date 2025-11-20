@@ -289,3 +289,101 @@ shame.
 UPDATE:
 I am dumb as hell.
 There are tabs in tableplus... you just have a limit of 3 tabs open at any given time : e.g. tables
+
+## Ep 9 - Meet Eloquent (19mins)
+
+### Quick Summary
+#### Outline
+Eloqent = 1 core pillar of laravel
+= ORM (object relational mapper)
+Maps DB rows to PHP objects - makes it easier to work with data via OOP
+Example: instead of manually handling an array of job listings
+    You can have a Job object representing each record with all attributes and behaviours.
+        On the lines of
+            Job.id ... Job.salary
+            Job.Change_salary() ... Job.Add_Inflation()
+
+#### Additional points
+KEY POINTS (to look out for)
+    extends Model
+    all()
+    find()
+    protected
+    ::create
+    $fillable
+    php artisan tinker
+    php artisan make:model {modelName} -m
+
+#### Homework
+HOMEWORK (adding now to keep in mind as I study)
+    Generate models and migrations
+    Run migrations and use Tinker to interact with records
+        get comfortable with commands and concepts
+            They will show up a lot!
+
+### Notes
+#### Converting Your Job Class to an Eloquent Model
+Convert existing Job class into an eloquent model
+    rm hardcoded job listings array (data now from db)
+    make class extend Larabels base Model class
+        class Job extends Model
+    (this gives class access to eloquents querying methods such as all() and find())
+
+#### Working with Eloquent in Routes
+In routes file, use eloquent methods to fetch data
+    Your routes file is web.php
+Example:
+    $jobs = Job::all();
+    dd($jobs)
+Remember!
+    You must add a using at the top
+        use App\Models\Job;
+
+If there is an empty collection,
+    Check db table name matches eloquents convensions
+    MUST BE plural_snake_case of the models name
+        jobs >>> for Job
+NOTE: IF table has a different name, you can specify in the model
+    protected $table = 'job_listings'
+
+#### Inspecting Eloquent Collections
+Eloquent returns a collection of model instances
+    each item is an instance of the model class
+        you can add methods and behaviours directly to the model!
+    You can also access arrtibutes
+    EXAMPLE:
+        ```$jobs[0] -> title;```
+            accesses the title of the first job
+
+#### Using Eloquent to Retrieve Records
+Retrieve all records with all()
+Or find specific record by ID with find()
+```$job = Job::find(1);```
+Eloquent runs sql queries in the background (but you interact with a clean expressive api)
+
+#### Creating Records with Eloquent and Mass Assignment Protection
+create new record with create() method
+``` 
+Job::create([
+    'title' => 'Acme Director',
+    'salary' => '1000000',
+]); 
+```
+Laravel protects against
+    mass assignment vulnerabilities
+        by requiring you to specify which attributes are mass assignable in the the model
+    This prevents malicious users from modifying unintended fields.
+
+#### Using Tinker for Interactive Testing
+Tinker = REPL (interactive shell) for the app
+```php artisan tinker```
+Used to test eloquent queries, create records, updt data
+
+#### Generating Models and Migrations
+Can gen models and corresponding migrations using artisan
+```php artisan make:model Post -m```
+Creates a Post model + migration file to define its db table
+Migrations allow to define and modify db schema in php
+    used to vers control and share with team.
+
+### Additional notes
