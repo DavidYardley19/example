@@ -736,3 +736,46 @@ Eloquent collections behave like arrays.
     But include helpful methods for filtering and manipulation.
 
 ### Workthrough notes:
+assigned a job variable in tinker via
+`$job = App\Model\Job::first();`
+This was just the first item in the array.
+Used the following code to see the employer information
+`$job->employer;`
+The reason there was no brackets on the end was because we are trying to access a property instead
+Laravel can see that there is no employer property
+    so it will try to use the employer relationship instead!
+        Makes things easier.
+You can then access the employers methods too such as filtering down for the name
+`$job->employer->name;`
+
+Note: lazy loading is used.
+    Query is not being executed until the last possible minute.
+        A new SQL query may include
+            Select all from employers where employerID = 2
+                just an example.
+
+Try the same the other way around?
+    See what a particaular employerhas in temrs of jobs.
+    Not possible yet
+    WHY?
+        Well we havent written the relational code for it yet.
+
+Check into the Employer.php file in Models.
+
+Day 11 was bl**dy short!
+
+### Homework
+Get this into muscle memory, play with it.
+Use the relationships between posts and comments perhaps?!
+    One post has many comments
+    one comment belongs to one post.
+    One user may make many posts.
+    Many posts may have many tags - perhaps.
+        This one will be covered in day 12
+
+Homework copied:
+```
+Practice defining hasMany and belongsTo relationships using examples like posts and comments, or posts and users. Experiment with accessing related models and understand how Eloquent handles these relationships.
+
+See you in day twelve!
+```
