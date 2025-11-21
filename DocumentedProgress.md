@@ -670,4 +670,69 @@ We focused on DB stuff today
     Will move to how we can manage this on the eloquent end.
         IF we have a job- how do we fetch the employers name for that listing.
 
-## Ep 11 - Two Key Eloquent Relationship Types
+## Ep 11 - Two Key Eloquent Relationship Types (7m47s)
+
+### Quick Summary
+Eloquent relationships - feature that lets you define how models relate to one another.
+
+Define relationships with methods such as belongsTo and hasMany.
+
+Access related models as properties
+    Triggers lazy loading.
+
+Two relationship types cover most use cases.
+
+More complex relationships such as belongsToMany and polymorphic relations will be covered at a later time!
+
+### Pre notes
+
+#### Defining Relationships Between Models
+Prev established job listings belong to an emplpyer.
+    Whilst db schema reflects this with a FK - PHP code needs to express this relationship also!
+
+Within Job model
+    Define an employer Method > returns the relatinship
+```
+public function employer()
+{
+    return $this->belongsTo(Employer::class);
+}
+```
+This tells Eloquent: each job belonds to ONE employer.
+
+#### Relationship Types
+Common Eloquent relationships:
+    belongsTo (1-1 or Many)
+    hasMany (1-M)
+    hasOne
+    belongsToMany
+Focus for today = belongsTo and hasMany.
+
+#### Accessing Related Models
+Artisan tinker again! yipeee.
+Fetch a job and access employer via following code:
+```
+$job = App\Models\Job::first();
+$employer = $job->employer; // Access as a property, not a method so no brackets on the end.
+```
+Eloquent uses lazy loading
+    related employer data only fetched when you access the employer property (triggers a seperate SQL query)
+
+#### Defining the Reverse Relationship
+In the employer model (define the inverse relationship)
+```
+public function jobs()
+{
+    return $this->hasMany(Job::class);
+}
+```
+
+This allows you to get all jobs for a given employer:
+```
+$employer = App\Models\Employer::first();
+$jobs = $employer->jobs; // Returns a collection of Job models
+```
+Eloquent collections behave like arrays.
+    But include helpful methods for filtering and manipulation.
+
+### Workthrough notes:
