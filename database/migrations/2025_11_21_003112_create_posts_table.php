@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\User;
 
 return new class extends Migration
 {
@@ -17,6 +18,7 @@ return new class extends Migration
             // string maxed to 255 characters by default, use text for longer content
             $table->text('content');
             $table->timestamps();
+            $table->foreignIdFor(User::class);
         });
     }
 

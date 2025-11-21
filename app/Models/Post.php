@@ -8,13 +8,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Post extends Model
 {
 
-    public HasFactory;
+    use HasFactory;
 
-            protected $fillable = [
+    protected $fillable = [
         'title',
-        'content'
+        'content',
     ];
-
 
     public function comments() {
         return $this->hasMany(Comment::class);
