@@ -456,3 +456,218 @@ States allow creation of variations of models for specific scenatios
 
 ### Quick pre-checks
 Going to try to use codespaces to see if the tinker issues lift.
+composer install
+php: /lib/x86_64-linux-gnu/libcrypto.so.1.1: version `OPENSSL_1_1_1' not found (required by php)
+Tried to sort this out but it failed.
+    dev container built with corresponding json file, rebuilt container... nothing. A HEAD SCRATCHER THIS ONE.
+reverted to last git changes
+
+NOTE: just add a ->toArray() on the end to see more info such as the attributes
+Example code
+```App\Models\Job::all()->toArray()```
+
+### Recap
+Going to quickly recap on yesterday.
+
+Created a new model - with corresponding migration file.
+```
+php artisan make:model MatchPlay -m
+```
+
+Amended the migration file
+```
+        Schema::create('match_plays', function (Blueprint $table) {
+            $table->id();
+            $table->string('home_team');
+            $table->string('away_team');
+            $table->string('location');
+            $table->date('match_date');
+            $table->integer('home_team_score')
+            $table->integer('away_team_score')
+            $table->timestamps();
+        });
+```
+
+Amended the model to deal with mass exception (fillable variable overriden(?) here)
+```
+    protected $fillable = [
+        'home_team',
+        'away_team',
+        'location',
+        'match_date',
+        'home_team_score',
+        'away_team_score'
+    ];
+```
+
+Added a row to the db table (initially didnt work but I just needed to set some attributes to nullable in the migration)
+```
+> App\Models\MatchPlay::create(['home_team'=>'Runcorn', 'away_team'=>'Warrington', 'location'=>'The heath school', 'match_dat
+e'=>'2025-11-21']);
+```
+
+
+Checked out the added item
+```
+> App\Models\MatchPlay::all()->toArray()
+= [
+    [
+      "id" => 1,
+      "home_team" => "Runcorn",
+      "away_team" => "Warrington",
+      "location" => "The heath school",
+      "match_date" => "2025-11-21",
+      "home_team_score" => null,
+      "away_team_score" => null,
+      "created_at" => "2025-11-21T16:53:32.000000Z",
+      "updated_at" => "2025-11-21T16:53:32.000000Z",
+    ],
+  ]
+```
+
+Made changes to that match data in TABLEPLUS to add score.
+And then pushed changes.
+sql updated successfully in vscode too
+Will run the commands again to see this in tinker - get used to it
+
+### Notes
+#### Using Factories with Tinker
+php artisan tinker.
+Create user with factory
+`User::factory()->create();`
+NOTE: if errors with missing cols, check schema matches factory attributes
+    example: if renamed name to FirstName and LastName etc.
+Update the factory accordingly.
+`'firstName' => $this->faker->firstName(),`
+`'lastName' => $this->faker->lastName(),`
+MUST restart tinker after changes.
+
+#### Creating Multiple Records
+example
+`User::factory()->count(100)->create();`
+This quickly generates 100 fake users
+
+#### Creating a Factory for Job Listings
+Instead of duping user factory, gen a new factory for the Job Model 
+`php artisan make:factory JobFactory --model=Job`
+In this JobFactory: define attributes such as title and salary.
+Fakers methods such as jobTitle for realistic data (values can be hardcoded)
+```
+public function definition()
+{
+    return [
+        'title' => $this->faker->jobTitle(),
+        'salary' => $this->faker->numberBetween(30000, 100000),
+    ];
+}
+```
+
+#### Using Factories with Relationships
+If job model belongs to an employer - define relationship in factory by creating an employer factory + reference this.
+`'employer_id' => Employer::factory(),`
+Tells laravel: create new employer record when generating a job + associate accordingly.
+If there are errors:
+    e.g. Employer factory not found
+    generate the factory and make sure you add HasFactory trait to the model
+
+#### Factory States
+Represent different variations of a model
+Example: UserFactory has a unverified state (sets emailVerifiedAt to Null)
+```
+public function unverified()
+{
+    return $this->state(fn (array $attributes) => [
+        'email_verified_at' => null,
+    ]);
+}
+```
+Can create a new user in this state:
+`User::factory()->unverified()->create();`
+Own states can be defined such as 'admin' state (for users with admin priveledges) > Very useful.
+
+### Additional
+Factory used to scaffold or generate things like users.
+    Great for testing.
+    Quick generation
+        Especially when generating a f-tonne of objects in a model.
+
+Tried to run App\Models\User::factory()->create()
+This came back with an error!
+```
+> App\Models\User::factory()->create()
+
+   Illuminate\Database\QueryException  SQLSTATE[HY000]: General error: 1 table users has no column named name (Connection: sqlite, SQL: insert into "users" ("name", "email", "email_verified_at", "password", "remember_token", "updated_at", "created_at") values (Connor Luettgen, elvera83@example.com, 2025-11-21 17:43:14, $2y$12$5iHBkNE1l/5B1ZmCwkHLnOBH2nY8DAztTG.lDM2PSOMjdEi3SyrtO, j7w1yP4q5B, 2025-11-21 17:43:15, 2025-11-21 17:43:15)).
+```
+What does this mean? No column named name...
+Well, we tweaked the name to have two attributes instead: firstname and lastname.
+Checl tableplus to see (structure)
+
+Within the UserFactory, you will see a fake() function
+    this makes use of an api call to Faker (incudes methods for fake data)
+There is already a method you can use from it!
+`'first_name' => fake()->firstName(),`
+
+NOTE: Trying to run the following code again will fail!
+`App\Models\User::factory()->create()`
+Why- when running tinker, all the code is loaded into memory... You need to exit out and run tinker again.
+
+Restarted tinker and tried again... IT worked!!!
+
+Well now you may want MANY records of fake data.
+Run the same command but add an integer in the factory brackets
+`App\Models\User::factory(100)->create()`
+
+IF YOU NEED ASSISTANCE
+do not type php artisan make:factory help
+Stick the help before the make:factory.
+
+Made a factory for jobs
+`php artisan make:factory JobFactory`
+Ran tinker + tried to create one
+`App\Models\Job::factory()->create();`
+BADMETHODCALL exceptoin!
+Called to undefined method...
+check Job model...
+Since we manually created this model, it didnt including a using statment:
+`use hasFactory`
+
+Managed to create a user which implements a method Unverified (using a chain of commands)
+`App\Models\User::factory()->Unverified()->create()`
+Discussed state methods
+Set one up for admin - commented this section out for now.
+
+Created a new model called Employer (with migrations)
+in the job listings migration - added `$table->foreignId(App\Models\Employer::class);`
+running `php artisan migrate:fresh`
+You will lose all seed data (from the factory? via tinker.)
+    This is fine as that was only for testing purposes.
+
+Now try to create a bunch of jobs... it should fault.
+`php artisan tinker`
+`App\Models\Job::factory(50)->create()`
+It does not work bc employer id was not provided! >> So update job factory.
+
+So i added to the JobFactory file
+in the definition function
+`employer_id' => Employer::factory()`
+But it still fails... employer factory not found
+
+When we were making the model, we could use -m for an appended migration
+But we can also use -f for a corresponding factory.
+Going to delete the Employer.php model for now then redo this !
+
+ISSUE arose
+`$table->foreignId(Employer::class);`
+I needed to use foreignIdFor... needs the For appended there!
+Better code:
+`$table->foreignIdFor(Employer::class);`
+
+Theres a method called recycle when simulating cross table data via the factory.
+
+### Next up
+
+We focused on DB stuff today
+    Will move to how we can manage this on the eloquent end.
+        IF we have a job- how do we fetch the employers name for that listing.
+
+## Ep 11 - Two Key Eloquent Relationship Types
