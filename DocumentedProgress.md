@@ -444,3 +444,15 @@ it will show you arguments required, options,
 using -a on the end may be useful, find out what this means
 
 -m will create a corresponding migration
+
+## Ep 10 - Model Factories
+### Quick summary
+Factories- essential for generating quick fake data within the DB
+    useful for testing and local dev
+Artisan tinker used to create and test factory data
+gen factories with artisan commands  + define using Faker
+Factories handle relationships by referencing other factories
+States allow creation of variations of models for specific scenatios
+
+### Quick pre-checks
+Going to try to use codespaces to see if the tinker issues lift.
