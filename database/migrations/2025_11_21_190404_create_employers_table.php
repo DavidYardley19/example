@@ -15,6 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->timestamps();
+            // I was sat here thinking.. why is there no FK for job listings?
+            // then I remembered its the other way round, job listings has the FK for employers
+            // so no need to add anything else here
+            
+            // is this in relation to lazy loading?
+            // or eager loading?
+            // or is that something different entirely?
+            // I think its different, those are about how related models are fetched
+            // this is just about the table structure itself.
         });
     }
 

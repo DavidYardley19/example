@@ -779,3 +779,7 @@ Practice defining hasMany and belongsTo relationships using examples like posts 
 
 See you in day twelve!
 ```
+
+So note: if you set up migrations where a child has a fk to a parent.
+Then when you write up the factory stuff, you should ideally pull up the FK's from the parent model.
+    It was mentioned that there is a recycle method? To reuse the same parents every now and then... So it doesnt just run through the id's one by one.
