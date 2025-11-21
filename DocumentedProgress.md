@@ -400,3 +400,47 @@ Can index too like you normally would ```jobs[0]```
 To grab one value, use the following
 ```jobs[0]->salary```
 Note: you dont need quotes for attribute names
+
+command line playground for the laravel app
+    check for expected results
+    get variables, manipulate things
+        place to see what functions turned out to do
+php artisan tinker
+tried to use: ```> App\Models\Job::create(['title'=>'New Gen Developer', 'salary'=>'£68,000']);```
+GOT AN ERROR!
+    mass assignment exception
+        laravels security > They tell you not to assign attributes all in one go like that!
+        they keep you in line to avoid issues/ accidents
+    NOTE:
+        to protect problems with the end user!
+            You have to assume theyre going to do something wrong!
+                they can sneak in other attributes!
+    But the workaround is literally in that error message...
+    ```Add [title] to fillable property```
+
+NOTE: I may need to fix issues with the pager:
+    fix the PsySH pager
+    Not getting expected outputs in tinker... it still works but not the format that i want
+A work around for now is using dd()
+    but this is not ideal
+Tried to give it a go on different terminals in vscode but still got an issue.
+
+I've been trying to tackle this for a while now.
+crying > not literally but i sure as hell feel like it osifhiaosonmfcoiuhemosiacf
+
+Also tried to use git bash to sort out a php file in C:\Users\david\AppData\Roaming\PsySH
+I got it, set the code in there but still to noooooooo avail
+
+Will I be using tinker often?
+Yeah probably...
+Will have to just deal with the workarounds...
+dd() that \*\*\*\*\* :)
+
+Top tip
+use help before any given command to see extra info
+but like so
+``` php artisan help make:model ```
+it will show you arguments required, options, 
+using -a on the end may be useful, find out what this means
+
+-m will create a corresponding migration

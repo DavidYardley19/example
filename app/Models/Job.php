@@ -20,4 +20,10 @@ class Job extends Model {
     protected $table = 'job_listings';
     // Otherwise just rename the class to JobListing to match the table name.
         // Eloquent uses plural form of class name as table name by default.
+    
+    // alllows mass assignment for these fields
+        protected $fillable = [
+        'title',
+        'salary'
+    ];
     }

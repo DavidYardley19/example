@@ -5,9 +5,10 @@ use App\Models\Job;
 // The above is case sensitive!
 
 Route::get('/', function () {
-    $jobs = Job::all();
-    // dd($jobs);
-    dd($jobs[0] -> salary);
+    return view('home', [
+        'greeting' => 'Hello, welcome to the home page!',
+        'name' => 'DavBot'
+    ]);
 })->name('home');
 
 // amended the about page to jobs page, reflected in the view too (resources/views/jobs.blade.php)
