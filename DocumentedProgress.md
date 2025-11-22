@@ -961,3 +961,40 @@ Create a pivot table post_tag.
 Define belongsToMany relationships in the Post and Tag models.
 Experiment with attaching tags to posts and retrieving related data.
 ```
+
+Made a different migration for this called 2025_11_22_215054_create_post_tag_table
+the command used was:
+`php artisan make:migration create_post_tag_table --create=post_tag`
+
+Dont forget the using statements david!
+Was nice to pick up on an error and get to work immediately though. I'm feeling a benefit from the history of hiccups.
+    It's... satisfying.
+        bittersween process, in that order.
+
+Oh man the factory commands feel easy to use now too.. !
+
+Checking get() and pluck() functions:
+    picked out the first tag entry
+    then used the following code:
+    `$tag->posts()->get()->pluck('title','content')->toArray()`
+    RESPONSE:
+    `["this is some content for my post" => "my post"]`
+    Now... I thought this would produce the title first then give me the content after...
+    But it shows the content first then the title...
+
+Need to try attach to finish off the hw
+tried to use tag-jobs-attach(5)
+```
+> $tag->jobs()->attach(5)
+
+   Illuminate\Database\QueryException  SQLSTATE[23000]: Integrity constraint violation: 19 FOREIGN KEY constraint failed (Connection: sqlite, SQL: insert into "job_tag" ("job_listing_id", "tag_id") values (5, 1)).
+```
+I must be tired... I'm working with posts and tags... not jobs.
+
+New:
+```
+> $tag->posts()->get()->pluck('title','content')->toArray()
+= [
+    "Officiis molestiae cupiditate corrupti sit sed eligendi sit. Veritatis et quis facere voluptatem eaque. Et distinctio quis in non." => "Sit nihil fugit deserunt deserunt rerum facere voluptatem possimus.",
+  ]
+```
