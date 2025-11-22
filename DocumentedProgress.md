@@ -783,3 +783,83 @@ See you in day twelve!
 So note: if you set up migrations where a child has a fk to a parent.
 Then when you write up the factory stuff, you should ideally pull up the FK's from the parent model.
     It was mentioned that there is a recycle method? To reuse the same parents every now and then... So it doesnt just run through the id's one by one.
+
+## Ep 12 - Pivot Tables and BelongsToMany Relationships (14m23s)
+### Quick Summary
+Focus = create many to many relationships
+    between jobs and tags using pivot table + eloquent belongsToMany relationship
+
+### Quick HW (to keep at forefront of mind)
+Practice creating many to many relationships
+    between posts and tags in a blog
+1. Create posts and tags tables
+2. Create a pivot table post_tag
+3. Define belongsToMany relationships in the Post and Tag models
+4. Experiment with attaching tags to posts and retrieving related data.
+
+### Pre Notes
+#### Setting Up the Tag Model and Migration
+Generate the Tag model with migration and factory
+`php artisan make:model Tag -mf`
+Within the migration file, define the tags table with a name attribute.
+
+#### Creating the Pivot Table
+To connect jobs and tags: create a pivot table (named by combining the singular forms of the related tables in alph order >> eg. job_tag)
+
+The pivot table should incl foreign ID attributes for both job_listing_id and tag_id
+
+```
+$table->foreignId('job_listing_id')->constrained()->cascadeOnDelete();
+$table->foreignId('tag_id')->constrained()->cascadeOnDelete();
+$table->timestamps();
+```
+Since jobs table is named job_listings > YOU MUST specify the FK column as job_listing_id to avoid conflicts
+
+#### Enforcing Foreign Key Constraints
+Add constraints with cascading deletes to ensure that deleting a job or tag REMOVES related pivot records (preventing orphaned records)
+
+If using SQLite directly - may need to enable foreign key constraints manually w/ `PRAGMA foreign_keys = ON;`
+Laravel usually enables this by defualt in the app.
+
+#### Defining the Many-to-Many Relationship in Models
+In Job model, define tags:
+```
+public function tags()
+{
+    return $this->belongsToMany(Tag::class, 'job_tag', 'job_listing_id', 'tag_id');
+}
+```
+
+In the Tag model, define inverse jobs method:
+```
+public function jobs()
+{
+    return $this->belongsToMany(Job::class, 'job_tag', 'tag_id', 'job_listing_id');
+}
+```
+
+specify pivot table name and FK attributes explicitaly.
+Because your table names differ from Laravels conventions.
+
+#### Using the Relationship
+Access tags for a job:
+```
+$job = Job::find(10);
+$tags = $job->tags; // Returns a collection of Tag models
+```
+
+Or access jobs for a tag:
+```
+$tag = Tag::find(1);
+$jobs = $tag->jobs; // Returns a collection of Job models
+```
+
+#### Attaching and Detaching Related Models
+Attach a tag to a job
+`$tag->jobs()->attach($jobId)`
+When accessing the relationship as a property, you get a cached collection.
+To refresh and get latest data:
+    Call the relationship as a method with get()
+`$tag->jobs()->get();`
+
+### Practical Notes
