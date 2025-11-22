@@ -17,7 +17,8 @@ class TagFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            // is the below right with jobtype? answer: yes
+            'name' => fake()->word(),
         ];
     }
 }
