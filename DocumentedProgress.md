@@ -863,3 +863,38 @@ To refresh and get latest data:
 `$tag->jobs()->get();`
 
 ### Practical Notes
+could create a brand new mgration for pivot tables
+Or you can just append another schema::create in the same migration as a related table.
+
+Added the following to the tags migration
+```
+        Schema::create('job_tag', function (Blueprint $table) {
+            $table->id();
+            // going to overwrite the foreign names to match the models
+            $table->foreignIdFor(Job::class, 'job_listing_id');
+            $table->foreignIdFor(Tag::class);
+            $table->timestamps();
+        });
+```
+
+Going to add a foreign constraint
+```
+$table->foreignIdFor(Job::class, 'job_listing_id')->constrained()->cascadeOnDelete();
+$table->foreignIdFor(Tag::class)->constrained()->cascadeOnDelete();
+```
+Note: ensure you have functionality to drop the pivot table aswell.
+`Schema::dropIfExists('job_tag');`
+Can run multiple artisan commands in the cmd with the && operator
+`php artisan migrate:rollback && php artisan migrate:fresh`
+
+Alright added the constraint but it didnt seem to constrain anything - WHY
+default for sqlite is that constraints are not enforced
+but in laravel app, they are enforced.
+    So when in db delete, and wanting constraints to take effect, we have to set this up manually.
+
+Go back to TablePlus
+    SQL tab
+    Run PRAGMA foreign_keys=on
+
+    RUNNING INTO ISSUES HERE
+    ROUGHLY AROUND THE 6 MINUTE MARK.
