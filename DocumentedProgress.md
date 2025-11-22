@@ -898,3 +898,66 @@ Go back to TablePlus
 
     RUNNING INTO ISSUES HERE
     ROUGHLY AROUND THE 6 MINUTE MARK.
+
+DATE: 22/11/2025
+Alright so I think the issue was that i needed to run that sql command first, then run the rollback migrations + migrate.
+All is working now.
+There will be no orphaned entries in the pivot table!
+
+Set up belongs to many relationships in the models for job and tags
+```
+    public function jobs() {
+        return $this->belongsToMany(Job::class);
+    }
+```
+And
+```
+    public function tags() {
+        return $this->belongsToMany(Tag::class);
+    }
+```
+
+Returned an error when i tried to run:
+```
+$job = App\Models\Job::find(1)
+$job->tags
+```
+ERROR =
+```
+   Illuminate\Database\QueryException  SQLSTATE[HY000]: General error: 1 no such column: job_tag.job_id (Connection: sqlite, SQL: select "tags".*, "job_tag"."job_id" as "pivot_job_id", "job_tag"."tag_id" as "pivot_tag_id" from "tags" inner join "job_tag" on "tags"."id" = "job_tag"."tag_id" where "job_tag"."job_id" = 1).
+```
+WHY?
+expecting a col name of job id... we got job_listing id instead!
+You must specify, be explicit.
+
+used named arguments (this means you dont need to use arguments in a specific order)
+
+surronding attach
+Managed to attach a job to a tag using the following code
+```
+$tag = App\..yidayada.. ::find(1)
+$tag->jobs()->attach(7)
+
+// 7 is the id
+// Can also use the following
+
+$tag->jobs()->attach(App\Models\Job::find(7))
+```
+
+You may still only see one item when you try to see them again.
+
+Can refetch the tag and start over, or just run `$tag->jobs()>get()`
+
+You can also append the pluck('attributeName')
+To grab specific attributes.
+`$tag->jobs()>get()->pluck()`
+
+### Going to continue with HW next
+```
+Practice creating a many-to-many relationship between posts and tags in a blog example:
+
+Create posts and tags tables.
+Create a pivot table post_tag.
+Define belongsToMany relationships in the Post and Tag models.
+Experiment with attaching tags to posts and retrieving related data.
+```

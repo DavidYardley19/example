@@ -24,6 +24,13 @@ return new class extends Migration
             // going to overwrite the foreign names to match the models
             $table->foreignIdFor(Job::class, 'job_listing_id')->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Tag::class)->constrained()->cascadeOnDelete();
+            // how do i get the above two lines to apply in tablePlus?
+            // I think they will show as job_listing_id and tag_id as expected
+            // but how do i prevent orphaned entries if a job or tag is deleted?
+            // cascadeOnDelete should handle that
+            // well it isnt..
+            // so I need to write a manual query to clean up orphaned entries
+            // no help
             $table->timestamps();
         });
     }

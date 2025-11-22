@@ -19,4 +19,10 @@ class Job extends Model {
         // must ask if it works in reverse too
         // has many would be used because one employer may have many jobs going
     }
+
+    // 8min 20 - pivot tables and belongstomany relationships
+    public function tags() {
+        return $this->belongsToMany(Tag::class, foreignPivotKey: 'job_listing_id');
+    }
+
 }
