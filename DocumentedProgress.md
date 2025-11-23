@@ -1106,3 +1106,68 @@ I'm sure there must be something as a drawback to eager loading... But lets stic
 
 This will now result in an exception thrown.
 `Illuminate\Database\LazyLoadingViolationException`
+
+No Homework.
+
+## Ep 14 All You Need to Know About Pagination (13m6s)
+### Quick Summary
+Manage large datasets: fetches and displays records in smaller chunks
+    instead of all at once
+WHY?
+    Fetching thousands of records all at once can overwhelm the server + browser.
+    Pagnation limits num of records retrieved and displayed per-page.
+    ++ performance
+    ++ UX
+
+Laravel makes pagnation easy with built in methods + blade helpers.
+Customise pagnation views or switch css frameworks
+Choose between standard simple or cursor pagination based on needs.
+
+### Pre notes
+
+#### Implementing Pagination
+Replace query with so:
+`$jobs = Job::with('employer')->paginate(3);`
+This fetches 3 jobs per page along with employers.
+
+#### Displaying Pagination Links
+In blade view - render pagination links with:
+`{{$jobs->links()}}`
+Laravel auto gens styled pagination controls
+    Assuming you use Tailwind css by def'lt
+
+#### Customizing Pagination Views
+Customise pagination markup or use different css framework (bootstrap eg)
+Publish the pagination views with:
+    `php artisan vendor:publish --tag=laravel-pagination`
+
+This copies pag' views into resources\views\vendor\pagination dir' for editing.
+
+To switch def'lt pag view (eg to boostrap), config this in AppServiceProvider
+
+```
+use Illuminate\Pagination\Paginator;
+
+public function boot()
+{
+    Paginator::useBootstrapFive();
+}
+```
+
+#### Pagination Types
+STANDARD = shows page nums and nav links
+SIMPLE = shows only prev and next links (reduce query complexity)
+CURSOR = cursor (encoded string) for efficient pag' on LARGE datasets
+    This does however lack direct page num navigation.
+
+SIMPLE example.
+`$jobs = Job::with('employer')->simplePaginate(3)`
+CURSOR example
+`$jobs = Job::with('employer')->cursorPaginate(3);`
+
+#### How Pagination Queries Work
+STANDARD uses SQL LIMIT and OFFSET: to fetch correct subset of records.
+CURSOR pag' uses encoded cursor: fetch records after a certain point.
+    This avoids performance cost of large offsets.
+
+### Practical Notes
