@@ -1316,5 +1316,90 @@ On to forms next :)
 
 ## Ep 16 Forms and CSRF Explained (with Examples) (23m 52s)
 Bit of a chunky episode! (relative)
-### Quick Summary
 
+### Quick Summary
+Forms: converting request data handling, 
+    organising folders,
+    Cross site request forgery (CSRF) protection.
+
+Define specific routes before wildcard routes
+    avoids conflicts
+Organise views in resource-specific folders 
+    (w/ conventional names)
+Tailwind ui comps to build forms quickly
+Set form method to POST
+    include a csrf token wiht @csrf
+Access request data via request() helper
+Eloquent to create new records safely
+    (with mass assignment protection!)
+Redirect users after successful form submits.
+
+### Pre Notes
+#### Defining Routes for Forms
+When adding a route for creating a new job
+    use the URI jobs/create
+Stay aware of the route order!!
+    wildcard routes like job/{id} should come after specific routes like jobs/create...
+        otherwise we get conflicts!
+
+"job... what job??"
+
+#### Organizing Views
+Group related views in folders
+    e.g. place for all job related views in a jobs dir
+use common naming convensions
+    ```
+        index.blade.php for listing all jobs
+        show.blade.php for displaying a single job
+        create.blade.php for the form to create a job
+    ```
+Use dot notation in views references
+    e.g. 'jobs.create'
+
+#### Building the Form
+Tailwind form template
+    trimming unnecesarry sections
+    adjust input fields to match db attributes
+        title, salary
+    add placeholders
+    include padding for better UX
+
+#### Handling Form Submission
+Forms submit via GET to themselves.. by def
+    change method to POST
+        set action to /jobs - follows RESTful conventions for creating resources.
+    Add a POST route for /jobs in routes file (web.php) 
+        (to handle form submissions)
+
+#### CSRF Protection
+Laravel protects against CSRF attacks by req a token in the POST requests.
+    add blade directive @csrf inside form
+        this is a hidden token input
+Without this you get a 419 error!
+    page expired.
+
+#### Accessing Request Data
+use request() helper to retrieve form data
+```
+$request->all(); // all form data
+$request->input('title'); // specific field
+```
+
+#### Creating Records
+Create new job record with eloquents create() method 
+    (with request data)
+```
+Job::create([
+    'title' => $request->input('title'),
+    'salary' => $request->input('salary'),
+    'employer_id' => $employerId, // typically from authenticated user
+]);
+```
+
+include employer_id in modules $fillable array
+    or disable mass assignment protection accordingly.
+
+#### Redirecting After Submission
+After creating a Job
+    redirect user back to job listings page
+`return redirect('/jobs');`
