@@ -1190,3 +1190,9 @@ publish- publish relevent assets, routes, files, views >> to application folder
 
 Q: Where is the markup for these pagnation links!
 need to publish them so we can manually edit the files.
+
+Little bit of problem solving
+when using publish, i needed to enter the number of the line associated with the thing im publishing
+So laravel-pagination was actually no16 in this case.
+Vendor folder now showing in the views dir.
+
