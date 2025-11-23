@@ -1196,3 +1196,5 @@ when using publish, i needed to enter the number of the line associated with the
 So laravel-pagination was actually no16 in this case.
 Vendor folder now showing in the views dir.
 
+CHANGE from tailwind to bootstrap for example:
+    AppServiceProvider
