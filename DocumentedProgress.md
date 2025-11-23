@@ -1229,3 +1229,73 @@ Backup of code
 ```
 
 ## Ep 15 Understanding Database Seeders (7m 49s)
+
+### Quick summary
+Automate populating db with test or initial data.
+Use `php artisan db:seed` to run seeders
+Combine migrations and seeding with `migrate:fresh --seed`
+    We used this in class.
+Factories gen fake data efficiently with seeders.
+Split seeders for modular and flexible data setup
+
+### Pre Notes
+#### Why Use Database Seeders?
+after ` php artisan migrate:freshg`
+DB tables recreated but empty!!!
+    Manually inserting data is tediuous (here, here.)
+Seeders automate process.
+
+#### Seeders in Laravel
+Check database/seeders dir.
+Default DatabaseSeeder class is entry point > to run multiple seeders.
+
+To run seeders use:
+    `php artisan db:seed`
+
+#### Creating and Running Seeders
+If there are errors like missing cols, ensure seeders and factories match your DB schema.
+
+Combine migration and seeding in one command:
+`php artisan migrate:fresh --seed`
+This drops all tables, runs migrations, and then seeds.
+
+#### Using Factories in Seeders
+To gen large data quickly.
+`\App\Models\Job::factory(200)->create();`
+
+#### Splitting Seeders for Flexibility
+Create multiple seeder classes for diff parts of your DB
+`php artisan make:seeder JobSeeder`
+This lets you run seeders individually, or in groups.
+    Good for testing/ partial data refreshes
+
+In DatabaseSeeder: call other seeders.
+```
+public function run()
+{
+    $this->call([
+        UserSeeder::class,
+        JobSeeder::class,
+    ]);
+}
+```
+
+### Practical Notes
+when running php artisan migrate:fresh... It wipes everything!
+Its tough on the mentals to populate tables with manual factory code again and again.
+
+tried to run php artisan db:seed... fail
+WHY
+Well, we need to make sure the seeder and factory match the db schema..
+Here, our users were amended to have 2 attributes for first and last name, rather than just name.
+So change the code in the seeder file.
+
+Now use `php artisan migrate:fresh --seed`
+indicates that the seed task will be re-run.
+You cannot use -s !!
+
+running php artisan db:seed AGAIN..
+FAILED!
+WHY
+We tried to add the same user that already exists... but one of the attributes states that it must be unique.
+So avoid this problem with php artisan migrate:fresh --seed !!
