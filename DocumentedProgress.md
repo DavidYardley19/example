@@ -1443,3 +1443,23 @@ Additionally, you would have a create view for creating a task.
 Now need to amend the routes file to suit this.
     `return view('jobs.index', [`
 You can also use `jobs/index` but the dot notation is more common.
+
+Onto Tailwindui.com >> Going to grab a form template from here.
+
+QUICK NOTE:
+Some things wont look quite right.
+tailwindui is not compatible with the latest vers of tailwind.
+```
+C:\Users\david\Herd\example>npm list tailwindcss
+example@ C:\Users\david\Herd\example
+├─┬ @tailwindcss/vite@4.1.17
+│ ├─┬ @tailwindcss/node@4.1.17
+│ │ └── tailwindcss@4.1.17 deduped
+│ └── tailwindcss@4.1.17 deduped
+└── tailwindcss@4.1.17
+```
+
+Anything 4.x will not work
+can downgrade or change the code..
+Right now this just concerns the UI.. functionality should remain the same.
+    but be careful!
