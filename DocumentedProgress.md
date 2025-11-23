@@ -1403,3 +1403,43 @@ include employer_id in modules $fillable array
 After creating a Job
     redirect user back to job listings page
 `return redirect('/jobs');`
+
+### Practical Notes
+Tried to add the following to test jobs/create.
+```
+Route::get('/jobs/create', function(){
+    dd('hello');
+});
+```
+Result:
+ErrorException
+resources\views\job.blade.php:7
+Trying to access array offset on null
+
+WHY
+Notice we have a wildcard declared abvove this!
+    This listens to a request for jobs/ANYTHING (id)
+        this includes create, which was made after this route... so leave the wildcards to the bottom
+COMMON ISSUE
+
+MOVED THIS> success.
+
+creating a dir called `jobs` in the views folder to collect job related resources.
+Think of this like namespace... Maybe that's just complicated it more.
+File structure.
+organise that.
+
+renamed jobs.blade.php to `index.blade.php`
+many files can have the same name as long as theyre in diff dir's
+This us usually where EVERYTHING is shown.
+
+Will amend job.blade.php to `show.blade.php`
+This is for singular items...
+"Show me this one pokemon in your pokemon index."
+
+Additionally, you would have a create view for creating a task.
+`create.blade.php`
+
+Now need to amend the routes file to suit this.
+    `return view('jobs.index', [`
+You can also use `jobs/index` but the dot notation is more common.

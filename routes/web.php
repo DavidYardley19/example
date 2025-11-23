@@ -12,18 +12,11 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/jobs', function () {
-    // $jobs = Job::with('employer')->simplePaginate(3);
-    // just has a prev and next button. This is fine unless a user really wants to jump pages.
-
-    // $jobs = Job::with('employer')->cursorPaginate(3);
-    // if you hover over the next button, the url will have a cursor value... this is random asf
-        // you drop the ability to jump to specific pages, but its more efficient for large datasets
-        // good for infinite scrolls
 
     $jobs = Job::with('employer')->simplePaginate(3);
 
     
-    return view('jobs', [
+    return view('jobs.index', [
         'greeting' => 'Hello, welcome to the jobs page!',
         'name' => 'DavBot',
 
@@ -33,11 +26,14 @@ Route::get('/jobs', function () {
     ]);
 })->name('jobs');
 
-// need to create a route for the above > Listen for get requests to jobs/id
-// Laravel detects the thing wrapped in braces as a wild card
+// need a route for job: adding a job
+Route::get('/jobs/create', function(){
+    return view('jobs.create');
+});
+
 Route::get('/jobs/{id}', function ($id) {
     $job = Job::find($id);
-    return View('job', ['job' => $job]);
+    return View('jobs.show', ['job' => $job]);
 })->name('job');
 
 Route::get('/contact', function () {
