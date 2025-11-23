@@ -1198,3 +1198,34 @@ Vendor folder now showing in the views dir.
 
 CHANGE from tailwind to bootstrap for example:
     AppServiceProvider
+
+To make tweaks to tailwind paginator: go to: 
+`resources\views\vendor\pagination\tailwind.blade.php`
+
+There is currently a performance cost when displaying pagination in this way.
+If you have millions of records, it can be costly to calc how many pages you need and render them
+
+If displaying page 392 for example, it could be costly.
+Look at simple or cursor pagination.
+
+Swap paginate with simplepaginate.
+can also use cursor painate
+
+cursor may be good for infinate scrolls and large datasets where you dont need to use manually entered url.
+
+THIS IS 95% of what you need to know right now!
+
+Backup of code
+```
+    // $jobs = Job::with('employer')->simplePaginate(3);
+    // just has a prev and next button. This is fine unless a user really wants to jump pages.
+
+    // $jobs = Job::with('employer')->cursorPaginate(3);
+    // if you hover over the next button, the url will have a cursor value... this is random asf
+        // you drop the ability to jump to specific pages, but its more efficient for large datasets
+        // good for infinite scrolls
+
+    $jobs = Job::with('employer')->simplePaginate(3);
+```
+
+## Ep 15 Understanding Database Seeders (7m 49s)

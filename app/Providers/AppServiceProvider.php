@@ -23,7 +23,8 @@ class AppServiceProvider extends ServiceProvider
         Model::preventLazyLoading();
 
         // config paginator to use bootstrap styling
-        \Illuminate\Pagination\Paginator::useBootstrap();
+        // commended out for now
+        // \Illuminate\Pagination\Paginator::useBootstrap();
 
     }
 }

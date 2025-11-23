@@ -12,9 +12,16 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/jobs', function () {
-    $jobs = Job::with('employer')->paginate(3);
-    // right now, this fetches ALL of them, issue with memory as data grows.
-    // use pagination.
+    // $jobs = Job::with('employer')->simplePaginate(3);
+    // just has a prev and next button. This is fine unless a user really wants to jump pages.
+
+    // $jobs = Job::with('employer')->cursorPaginate(3);
+    // if you hover over the next button, the url will have a cursor value... this is random asf
+        // you drop the ability to jump to specific pages, but its more efficient for large datasets
+        // good for infinite scrolls
+
+    $jobs = Job::with('employer')->simplePaginate(3);
+
     
     return view('jobs', [
         'greeting' => 'Hello, welcome to the jobs page!',
