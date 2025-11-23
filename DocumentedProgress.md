@@ -998,3 +998,68 @@ New:
     "Officiis molestiae cupiditate corrupti sit sed eligendi sit. Veritatis et quis facere voluptatem eaque. Et distinctio quis in non." => "Sit nihil fugit deserunt deserunt rerum facere voluptatem possimus.",
   ]
 ```
+
+## Ep 13 - Eager Loading and the N+1 Problem (10m33s)
+Little note: I feel dreadful.
+If you see this in the future, Dave.
+It was worth it.
+keep going man.
+Take a rest tomorrow, get creative with the PP module.
+
+### Quick Summary
+Tackling n+1 problem in eloquent relationships - learning how to optimise db queries with eager loading.
+
+n+1 problem causes excessive queries when lazy loading relationships in loops.
+Laravel debugbar can detect query counts.
+Fix n+1 by eager loading relationships with with()
+Optionally disable lazy loading in development to catch issues early.
+
+### Pre Notes
+#### Improving Job Listings Display
+We updated jobs view to display each job as clickable card
+    using anchor tags styled with tailwind.
+    Added padding, borders, spacing, rounded corners.
+Also displayed employers name above each job title
+    by accessing employer relationship on the job model
+
+#### Understanding the N+1 Problem
+When lazy loading relationships inside a loop
+    one query to fetch main records
+        one additional query per related record
+results in many queries - poor performance
+
+EG: fetching 8 jobs and their employers takes 9 queries.
+    1 for jobs, 8 for employers.
+
+#### Detecting the N+1 Problem
+Detect with tool: laravel debugbar
+    shows all sql queries executed during requests.
+
+install with composer
+`composer require barryvdh/laravel-debugbar --dev`
+Ensure APP_DEBUG set to true (.env)
+    this enables debugbar
+
+#### Fixing the N+1 Problem with Eager Loading
+Eager loading= fetches related models in single query upfront!
+    This reduces the number of queries.
+
+modify query to eager load employer relationship
+    `$jobs = Job::with('employer')->get();`
+This executes 2 queries regarding num of jobs
+    one for jobs, one for employers
+
+#### Optional: Disabling Lazy Loading
+Disable entirely = catches unintended queries
+    Do this in AppServiceProvider
+
+```
+use Illuminate\Database\Eloquent\Model;
+
+public function boot()
+{
+    Model::preventLazyLoading(!app()->isProduction());
+}
+```
+This throws an exception whenever lazy loading occurs.
+    That, is a good thing.
