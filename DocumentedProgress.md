@@ -1171,3 +1171,22 @@ CURSOR pag' uses encoded cursor: fetch records after a certain point.
     This avoids performance cost of large offsets.
 
 ### Practical Notes
+Amended a line with `$jobs = Job::with('employer')->paginate(3);` in the routes file.
+
+Checked the website, it worked! But where is the rest of it??
+Well, You can find this by appending a `?page=2` on the url
+Probably will check out how to make this more accessible to the user.
+
+This must be done in the blade template (i.e. jobs.blade.php in this case)
+
+Looks good! - laravel assumes you are using tailwind - formatting is already set up here!
+
+Custom libraries- diff from tailwind
+This is how:
+`php artisan vendor:publish `
+vendor- any package pulled with composer
+publish- publish relevent assets, routes, files, views >> to application folder
+    to manually control and edit them!
+
+Q: Where is the markup for these pagnation links!
+need to publish them so we can manually edit the files.

@@ -11,13 +11,10 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
-// amended the about page to jobs page, reflected in the view too (resources/views/jobs.blade.php)
 Route::get('/jobs', function () {
-    // With() = eager loading employer relatinships here. Prevents N+1 query problem.
-    $jobs = Job::with('employer')->get();
-
-    // testing without eager loading
-    // $jobs = Job::all();
+    $jobs = Job::with('employer')->paginate(3);
+    // right now, this fetches ALL of them, issue with memory as data grows.
+    // use pagination.
     
     return view('jobs', [
         'greeting' => 'Hello, welcome to the jobs page!',
