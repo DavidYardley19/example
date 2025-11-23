@@ -13,11 +13,19 @@ Route::get('/', function () {
 
 // amended the about page to jobs page, reflected in the view too (resources/views/jobs.blade.php)
 Route::get('/jobs', function () {
+    // With() = eager loading employer relatinships here. Prevents N+1 query problem.
+    $jobs = Job::with('employer')->get();
+
+    // testing without eager loading
+    // $jobs = Job::all();
+    
     return view('jobs', [
         'greeting' => 'Hello, welcome to the jobs page!',
         'name' => 'DavBot',
 
-        'jobs' => Job::all()
+        // 'jobs' => Job::all()
+        // replace the above with this:
+        'jobs' => $jobs
     ]);
 })->name('jobs');
 

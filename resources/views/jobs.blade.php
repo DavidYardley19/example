@@ -10,7 +10,7 @@
      then use: divide-y divide-gray-200 
      -->
      <!-- can i use margin instead or something else?
-     ans: use: gap-4 but that needs to be flex or grid 
+     ans: use: gap-4 but that needs to be flex or grid
      -->
     <div class="gap-4 flex flex-col">
         @foreach ($jobs as $job)

@@ -1063,3 +1063,46 @@ public function boot()
 ```
 This throws an exception whenever lazy loading occurs.
     That, is a good thing.
+
+### Practical Notes
+Installed debugbar
+searched for it online
+looked into readme docs
+
+all i had to do was run composer require barryvdh/laravel-debugbar --dev
+Then refresh the website
+The bar showed underneith
+
+Refreshed jobs page
+selected Queries on debugbar
+
+A DEAD GIVEAWAY for lazy loading
+seeing the same line repeated OVER AND OVER AND OVER
+select * from "employers" where "employers"."id" = 1 limit 1
+select * from "employers" where "employers"."id" = 2 limit 1
+...
+And so forth
+
+8 records: 8 queries.
+For every record, we plus 1 to the query.
+Lazy loading CAN be helpful, but performance issues will sneak their ways in
+
+eager loading placed in the routes file.
+`$jobs = Job::with('employer')->get();`
+Pagination disgussed next session.
+
+app\Providers\AppServiceProvider.php
+In here you can configure the app to disable lazy loading.
+Some devs do this at the start of each project - I might follow suit.
+Enforces a specific set a rules when programming. I don't want to switch between two styles.
+I'm sure there must be something as a drawback to eager loading... But lets stick to this.
+
+```
+    public function boot(): void
+    {
+        Model::preventLazyLoading();
+    }
+```
+
+This will now result in an exception thrown.
+`Illuminate\Database\LazyLoadingViolationException`
