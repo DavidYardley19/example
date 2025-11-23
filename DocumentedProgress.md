@@ -1299,3 +1299,22 @@ FAILED!
 WHY
 We tried to add the same user that already exists... but one of the attributes states that it must be unique.
 So avoid this problem with php artisan migrate:fresh --seed !!
+
+Creating a new seeder class with
+`php artisan make:seeder`
+Good for isolating tests later.
+Stick to this practice!!
+
+In the DADDY seeder, yes i will call it that.
+You can use the following to call other seeders.
+`$this->call(JobSeeder::class);`
+
+Can exclusively run one seeder instead
+`php artisan db:seed --class=JobSeeder`
+
+On to forms next :)
+
+## Ep 16 Forms and CSRF Explained (with Examples) (23m 52s)
+Bit of a chunky episode! (relative)
+### Quick Summary
+

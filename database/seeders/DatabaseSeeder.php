@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Job;
+use Database\Seeders\JobSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,6 +24,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        Job::factory(30)->create();
+        $this->call(JobSeeder::class);
     }
 }
