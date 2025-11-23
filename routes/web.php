@@ -36,6 +36,10 @@ Route::get('/jobs/{id}', function ($id) {
     return View('jobs.show', ['job' => $job]);
 })->name('job');
 
+Route::post('/jobs', function () {
+    dd(request()->all()); // dump and die - shows all the form data submitted
+});
+
 Route::get('/contact', function () {
     return view('contact', [
         'greeting' => 'Hello, welcome to the contact page!',
