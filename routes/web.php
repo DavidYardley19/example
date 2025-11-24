@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Job;
-use App\Models\Employer;
-// The above is case sensitive!
 
 Route::get('/', function () {
     return view('home', [
@@ -14,7 +12,7 @@ Route::get('/', function () {
 
 Route::get('/jobs', function () {
 
-    $jobs = Job::with('employer')->simplePaginate(3);
+    $jobs = Job::with('employer')->latest()->simplePaginate(3);
 
     
     return view('jobs.index', [

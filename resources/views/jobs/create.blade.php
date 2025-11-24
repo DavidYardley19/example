@@ -27,7 +27,7 @@
                         <div class="mt-2">
                             <div class="flex items-center rounded-md bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
                                 <div class="shrink-0 text-base text-gray-500 select-none sm:text-sm/6"></div>
-                                <input id="salary" type="text" name="salary" placeholder="£28,000 Per Year" class="block min-w-0 grow bg-white px-3 py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6" />
+                                <input id="salary" type="text" name="salary" placeholder="£28,000" class="block min-w-0 grow bg-white px-3 py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6" />
                             </div>
                         </div>
                     </div>

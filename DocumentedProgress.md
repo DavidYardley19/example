@@ -1530,3 +1530,20 @@ Different ways to filter request.
 
 Was wondering why it failed - 19min40s in...
 It was meant to fail. Be patient David.
+
+Guarded acts as a blacklist for fillable fields.
+```
+    // this can be annoying for some programmers- to have to amend this over and over
+    // as long as you understand the dangers, you can disable mass assignment protection
+    // use guarded instead of fillable to disable it
+    // protected $guarded = []; // all fields are mass assignable
+    // think whitelist vs blacklist
+    
+    // protected $fillable = [
+    //     'title',
+    //     'salary',
+    //     'employer_id'
+    // ];
+
+    protected $guarded = []; // all fields are mass assignable
+```
