@@ -1547,3 +1547,98 @@ Guarded acts as a blacklist for fillable fields.
 
     protected $guarded = []; // all fields are mass assignable
 ```
+
+## Ep 17 - Always Validate. Never Trust The User (13m49s)
+
+### Quick Summary
+Validation in forms- client and server side validation.
+    + Handling errors gracefully.
+
+Add create btn + route for job creation
+use @csrf - protect forms
+Validate inputs server side w/ laravel validation
+Display validation errors globally/ inline.
+Enhance UX w/ client side validation
+Create records safely - redirect after submission
+
+### Pre Notes
+#### Adding a Create Job Button
+Make it easier: access job creation form
+    Add a btn to redirect user
+Tailwind css classes to style nicely 
+    + postion with flexbox
+
+`<a href="/jobs/create" class="your-tailwind-button-classes">Create Job</a>`
+May be good to extract this into a reusable blade component. Learnt at the start of the module
+
+#### Defining Routes for Form Submission
+incl POST route > /jobs
+    handles form submits
+Initially add a simple sanity check
+    with dd("hello from POST") >>> confirm route is hit
+
+#### Understanding CSRF Protection
+without csrf = 419 error
+    Laravels protection against csrf attacks
+Fix with `@csrf` inside form.
+    injects hidden input with a unique token.
+
+#### Accessing Request Data
+request() helper >>> retrieves form inputs
+```
+$request->all(); // all inputs
+$request->input('title'); // specific input
+```
+
+#### Server-Side Validation
+Laravel has a built in validation tool
+If it fails > auto redirects back with error msg
+```
+$request->validate([
+    'title' => ['required', 'min:3'],
+    'salary' => ['required'],
+]);
+```
+
+#### Displaying Validation Errors
+GLOBALLY:
+```
+@if ($errors->any())
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li class="text-red-500">{{ $error }}</li>
+        @endforeach
+    </ul>
+@endif
+```
+
+Or display INLINE (below each input with @error directive)
+```
+@error('title')
+    <p class="text-red-500 text-sm">{{ $message }}</p>
+@enderror
+```
+
+#### Client-Side Validation
+incl `required` attribute to inputs
+    instant browser validation
+enhances UX - they get instant feedback without being sent to a ERROR!-page
+
+#### Creating Records and Redirecting
+After validation > create record with eloquent.
+```
+Job::create([
+    'title' => $request->input('title'),
+    'salary' => $request->input('salary'),
+    'employer_id' => $employerId, // typically from authenticated user
+]);
+
+return redirect('/jobs');
+```
+Include all mass assignable fields in models $fillable array
+    OR disable this with guarded (prev lesson)
+
+#### ADDITIONAL
+No homework listed, but get used to what is going on.
+
+### Practical Notes
