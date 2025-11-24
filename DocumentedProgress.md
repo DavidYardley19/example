@@ -1527,3 +1527,6 @@ Different ways to filter request.
     // dd(request('title'));
         // GET A SINGLE FIELD
 ```
+
+Was wondering why it failed - 19min40s in...
+It was meant to fail. Be patient David.

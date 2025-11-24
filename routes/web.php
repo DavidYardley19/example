@@ -41,7 +41,10 @@ Route::post('/jobs', function () {
     Job::create([
         'title' => request('title'),
         'salary' => request('salary'),
-        'employer_id'=> 1 // need to set up authentication later.
+
+        // issue with the below- this is because this is in context of the fillable field.
+        // go back to the job model - you will see fillable fields.
+        'employer_id' => 1 // need to set up authentication later.
     ]);
 
     return redirect('/jobs');
