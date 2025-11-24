@@ -1642,3 +1642,23 @@ Include all mass assignable fields in models $fillable array
 No homework listed, but get used to what is going on.
 
 ### Practical Notes
+```
+Route::post('/jobs', function () {
+
+    // validate the incoming request data >> So you don't have to do "required" in the HTML form
+    // I feel like this is better practice.
+    request()->validate([
+        'title' => 'required',
+        'salary' => 'required'
+    ]);
+```
+
+You can also produce min/max here... how many chars.
+
+when you use request()->validate()
+laravel sorts out issues automatically.
+
+Notice now... it failed.
+The errors were included but nothing was displayed!
+
+Return to create view

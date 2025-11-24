@@ -27,6 +27,7 @@ Route::get('/jobs', function () {
 
 // need a route for job: adding a job
 Route::get('/jobs/create', function(){
+
     return view('jobs.create');
 });
 
@@ -36,6 +37,15 @@ Route::get('/jobs/{id}', function ($id) {
 })->name('job');
 
 Route::post('/jobs', function () {
+
+    // validate the incoming request data >> So you don't have to do "required" in the HTML form
+    // I feel like this is better practice.
+    request()->validate([
+        'title' => ['required', 'min:3'],
+        // min 3 means minimum 3 characters
+        'salary' => 'required'
+    ]);
+
     Job::create([
         'title' => request('title'),
         'salary' => request('salary'),
