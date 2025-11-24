@@ -1662,3 +1662,23 @@ Notice now... it failed.
 The errors were included but nothing was displayed!
 
 Return to create view
+
+Example of inline validation:
+   ```
+                            @error('salary')
+                                <div class="mt-2 text-sm text-red-600 font-semibold mt-1">{{ $message }}</div>
+                            @enderror
+```
+This will only display if an error has occured with the input field relating to salary.
+
+Can also add a `required` attribute to the input tags.
+This is client side validation, instant feedback.
+
+Check out `laravel.com/docs/validation`
+Within the table of contects > theres a section for ALL VALIDATION RULES.
+
+COMPLETED
+
+## Ep 18 - Editing, Updating and Deleting a Resource (20m31s)
+Chonky ep
+### Quick Summary
