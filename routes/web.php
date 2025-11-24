@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Job;
+use App\Models\Employer;
 // The above is case sensitive!
 
 Route::get('/', function () {
@@ -37,7 +38,13 @@ Route::get('/jobs/{id}', function ($id) {
 })->name('job');
 
 Route::post('/jobs', function () {
-    dd(request()->all()); // dump and die - shows all the form data submitted
+    Job::create([
+        'title' => request('title'),
+        'salary' => request('salary'),
+        'employer_id'=> 1 // need to set up authentication later.
+    ]);
+
+    return redirect('/jobs');
 });
 
 Route::get('/contact', function () {

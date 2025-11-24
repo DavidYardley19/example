@@ -1466,3 +1466,64 @@ Right now this just concerns the UI.. functionality should remain the same.
 
 Form right now is blank
 It's just making a get request to itself and passing the fields provided.
+
+Recieved a 419 error, but no extra information right now
+    framework could be more clear here. so pay attention for now
+419 = laravel automatic csrf protection
+    cross site request forgery !!
+
+CODE USED
+```
+Route::post('/jobs', function () {
+    dd(request()->all()); // dump and die - shows all the form data submitted
+});
+```
+
+STORY TIME
+Imagine you're an employer of a local bank
+localbank.test
+Theres a page when you sign in to update passw
+Whats the problem?
+Localbank does not know anything about security
+
+A malicious person can take adv of the bank and you
+they would send an email "representing the local bank"
+They would ask you to update password and tell you to 'click here'
+
+Users sent to a form to update pw
+Submits it off
+user does not know something went down
+
+When they clicked that button, they didnt go back to localbank.test
+instead it went to a malicious site that looks exactly like it.
+
+When you submit the form on the malicous site, it sends a post request BACK to the localbank.test site...
+
+If you were already logged in earlier in the day then you're still in the session
+    you have cookies that say you're still signed in
+malicious post request will be successful because of this.
+
+Bandits have access to your pw
+they can then log in to your account.
+
+Token used - compares your local session token to the sites token
+    if they do not match then it probes a 419 error.
+
+`@csrf` blade directive can be added, first line after a form tag.
+You can inspect, and at the top of the form it is present.
+name= '_token'
+
+Different ways to filter request.
+```
+    // dd(request()->all());
+        // THIS INCLUDES THE CSRF TOKEN
+
+    // dd(request()->except('_token'));
+        // EXCLUDE THE CSRF TOKEN
+
+    // dd(request()->only('title', 'salary'));
+        // ONLY GET THESE FIELDS
+
+    // dd(request('title'));
+        // GET A SINGLE FIELD
+```

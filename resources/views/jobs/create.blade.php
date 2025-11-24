@@ -4,6 +4,8 @@
     </x-slot:heading>
 
     <form method="POST" action="/jobs">
+        @csrf
+        <!-- above expands to a hidden input -->
         <!-- percist a new job to the db (but we need a route to handle this) -->
         <div class="space-y-12">
             <div class="border-b border-gray-900/10 pb-12">
