@@ -16,7 +16,6 @@
     </div>
 
     <div>
-        <!-- links for the pagination -->
         {{ $jobs->links() }}
     </div>
 

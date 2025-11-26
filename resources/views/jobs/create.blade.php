@@ -5,8 +5,6 @@
 
     <form method="POST" action="/jobs">
         @csrf
-        <!-- above expands to a hidden input -->
-        <!-- percist a new job to the db (but we need a route to handle this) -->
         <div class="space-y-12">
             <div class="border-b border-gray-900/10 pb-12">
                 <h2 class="text-base font-semibold leading-7 text-gray-900">Create a new Job</h2>
@@ -19,9 +17,6 @@
                                 <div class="shrink-0 text-base text-gray-500 select-none sm:text-sm/6"></div>
                                 <input required id="title" type="text" name="title" placeholder="IT Support Technician" class="block min-w-0 grow bg-white px-3 py-1.5 pr-3 pl-1 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6" />
                             </div>
-                            <!-- if we have a validation error for the title, then procede with this!
-                             Title variable is only available in the error message.
-                            -->
                             @error('title')
                                 <div class="mt-2 text-sm text-red-600 font-semibold mt-1">{{ $message }}</div>
                             @enderror
@@ -41,17 +36,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- commenting out error example for future ref, going to use a more sleaker approach. -->
-                <!-- @if ($errors->any())
-                    <div class="mt-4 p-4 bg-red-50 border border-red-200 rounded-md">
-                        <ul class="list-disc list-inside space-y-1">
-                            @foreach ($errors->all() as $error)
-                                <li class="text-red-800 text-sm">{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif -->
             </div>
         </div>
 

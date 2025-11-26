@@ -8,19 +8,6 @@ use App\Models\Employer;
 class Job extends Model {
     use HasFactory; // allows for the factory method call.
     protected $table = 'job_listings';
-
-    // this can be annoying for some programmers- to have to amend this over and over
-    // as long as you understand the dangers, you can disable mass assignment protection
-    // use guarded instead of fillable to disable it
-    // protected $guarded = []; // all fields are mass assignable
-    // think whitelist vs blacklist
-    
-    // protected $fillable = [
-    //     'title',
-    //     'salary',
-    //     'employer_id'
-    // ];
-
     protected $guarded = []; // all fields are mass assignable
 
     public function employer() {

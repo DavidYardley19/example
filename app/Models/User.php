@@ -11,8 +11,6 @@ class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
-    // hasfactory adds methods to create model instances for testing/ seeding.
-    // one of which is the factory() method.
 
     /**
      * The attributes that are mass assignable.

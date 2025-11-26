@@ -3,12 +3,9 @@
         Edit Job: {{ $job['title'] }}
     </x-slot:heading>
 
-    <!-- cannot set this to patch.. need to spoof? -->
     <form method="POST" action="/jobs/{{ $job['id'] }}">
         @csrf
         @method('PATCH')
-        <!-- above expands to a hidden input -->
-        <!-- percist a new job to the db (but we need a route to handle this) -->
         <div class="space-y-12">
             <div class="border-b border-gray-900/10 pb-12">
                 <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 py-4">
@@ -27,9 +24,6 @@
                                     value="{{ $job['title'] }}"
                                    />
                             </div>
-                            <!-- if we have a validation error for the title, then procede with this!
-                             Title variable is only available in the error message.
-                            -->
                             @error('title')
                                 <div class="mt-2 text-sm text-red-600 font-semibold mt-1">{{ $message }}</div>
                             @enderror
@@ -74,6 +68,5 @@
     <form id="delete-form" method="POST" action="/jobs/{{ $job['id'] }}" class="hidden">
         @csrf
         @method('DELETE')
-        <!-- will sort this out in the routes file -->
     </form>
 </x-layout>

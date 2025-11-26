@@ -28,11 +28,8 @@ Route::get('/jobs/{job}', function (Job $job) {
 // store
 Route::post('/jobs', function () {
 
-    // validate the incoming request data >> So you don't have to do "required" in the HTML form
-    // I feel like this is better practice.
     request()->validate([
         'title' => ['required', 'min:3'],
-        // min 3 means minimum 3 characters
         'salary' => 'required'
     ]);
 
@@ -40,9 +37,7 @@ Route::post('/jobs', function () {
         'title' => request('title'),
         'salary' => request('salary'),
 
-        // issue with the below- this is because this is in context of the fillable field.
-        // go back to the job model - you will see fillable fields.
-        'employer_id' => 1 // need to set up authentication later.
+        'employer_id' => 1
     ]);
 
     return redirect('/jobs');
