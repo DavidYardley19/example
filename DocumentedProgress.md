@@ -1831,3 +1831,8 @@ This id needs to correspond with a form attribute in the button
 ```
                 <button form="delete-form" class="text-red-500 text-sm font-semibold">Delete</button>
 ```
+
+AUTHENTICATION chapter will discuss issues rn
+ANYONE can update or delete jobs... Not ideal for most/ nearly every scenario.
+
+Essence of CRUD completed.
