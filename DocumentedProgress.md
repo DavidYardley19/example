@@ -2058,3 +2058,33 @@ Route::controller(JobController::class)->group(function () {
     Route::delete('/jobs/{job}', 'destroy')->name('jobs.destroy');
 });
 ```
+
+FURTHER shortening:
+```
+Route::controller(JobController::class)->group(function () {
+    Route::get('/jobs', 'index');
+    Route::get('/jobs/create', 'create');
+    Route::get('/jobs/{job}', 'show');
+    Route::post('/jobs', 'store');
+    Route::get('/jobs/{job}/edit', 'edit');
+    Route::patch('/jobs/{job}', 'update');
+    Route::delete('/jobs/{job}', 'destroy');
+});
+```
+
+Instead you can use Route::resource
+`Route::resource('jobs', JobController::class);`
+
+Filtering:
+```
+Route::resource('jobs', JobController::class, [
+    'except' => ['edit']
+]);
+
+// often you dont need to gen ALL 7 routes.
+// you can specify only the ones you need like so:
+    // or you can do the inverse and exclude the ones you dont need:
+    // edit will then dissapear
+
+// you can use only if you wish
+```
