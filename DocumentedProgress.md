@@ -2099,3 +2099,87 @@ There are 7 of them
 * edit
 * update
 * destroy
+
+## Ep 20 - Starter Kits, Breeze, and Middleware (12m 28s)
+
+### Quick Summary
+focus = Authentication
+Laravel provides starter kits like `Laravel Breeze`.
+To quickly scaffold common authentication features such as:
+* login
+* registration
+* password reset
+* profile management
+
+Breeze save building authentication from scratch.
+It includes all essential features and route protection.
+Middleware ensures secure access control.
+Explore Breeze source code as an educational resource.
+
+### Pre Notes
+
+#### Using Laravel Breeze Starter Kit
+You can scaffold a new laravel project (WITH BREEZE) by using:
+`laravel new app`
+
+Select breeze as starter kit during setup
+BREEZE assumes a fresh project
+    and will overwrite some files like routes, views, components.
+
+Breeze supports multiple frontend stacks
+    react, vue, livewire (or traditional blade with js)
+For this scenario we choose blade stack without dark mode.
+
+After install, run app (php artisan serve)
+    or via Herd.
+You will see login and register links.
+
+#### Features Included
+* Reg and login forms
+* Dashboard accessible only to authed users
+* Profile editing and password update
+* Logout functionality
+* Middleware to protect routes and redirect guests to login
+
+#### How Authentication Works in Breeze
+* Routes = protected w/ middleware. Like `auth` and `verified`. This ensures only sighed in and verified users can access certain pages.
+* Authenticated user can be accessed via `Auth` facade/helper.
+* Breeze uses blade comps for layouts, inputes, labels, validation errors.
+* Reg logic includes validation, password hashing, event firing, automatic login.
+
+#### Middleware Explained
+Acts as layers.
+    That process requests before reaching application logic.
+Example:
+`auth` middleware checks if user is signed in and redirects to login if they are not.
+
+### Practical Notes
+SIDENOTE: Not sure if I can just create a new project inside of this one or not... will it mess up with other configuration files?
+Maybe if it was in its own folder...
+Still, will it mess everything up..?
+
+Starter kits - initial scaffolding
+Gets things going so you don't have to write out common comps over and over (like login registration etc.)
+BREEZE can automate process.
+
+Alright immediately im not seeting breeze as a starter kit when running laravel new {AppName}
+...
+asked chatgpt, giving it the version of laravel: 5.23.0
+
+Apparently the laravel installer is too old? what...
+I just downloaded it recently..
+These laracast videos are over a year old.
+
+Solution:
+Create the project first then determine that breeze is a required... package?
+
+1. laravel new BreezeDemo
+2. cd BreezeDemo
+3. composer require laravel/breeze --dev
+4. php artisan breeze:install
+    (4. = for breeze with blade >>> See online for other options like vue, react, next.js, inertia + vue/react.)
+5. npm install
+6. npm run dev
+
+WORKS!
+Going to call it a night. Sleep's not going well lately.
