@@ -1971,3 +1971,15 @@ Since they match, the wildcard provides the ID
 If they dont have an id... sayyyyy... posts.
 They usually come with a slug.
 So you will need to use `Route::get('/jobs/{job:slug}', function (Job $job) {`
+
+php artisan make:controller
+This allowed us to create a controller,
+selected an empty type.
+Looks like convention is to use the singularname
+camelcase
+`JobController` was used.
+
+Note: 
+index, show, create, update, delete, edit, store...
+These are all `ACTIONS`.
+NOT "METHODS"

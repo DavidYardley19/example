@@ -20,26 +20,47 @@ class JobController extends Controller
     }
 
     public function create() {
-        //
+        return view('jobs.create');
     }
 
-    public function show($id) {
-        //
+    public function show(Job $job) {
+        return View('jobs.show', ['job' => $job]);
     }
 
     public function store() {
-        //
+        request()->validate([
+            'title' => ['required', 'min:3'],
+            'salary' => 'required'
+        ]);
+
+        Job::create([
+            'title' => request('title'),
+            'salary' => request('salary'),
+
+            'employer_id' => 1
+        ]);
+
+        return redirect('/jobs');
     }
 
-    public function edit() {
-        //
+    public function edit(Job $job) {
+        return View('jobs.edit', ['job' => $job]);
+
     }
 
-    public function update() {
-        //
+    public function update(Job $job) {
+        request()->validate([
+            'title' => ['required', 'min:3'],
+            'salary' => 'required'
+        ]);
+
+            $job->update(request()->only(['title', 'salary']));
+        return redirect('/jobs/' . $job->id);
+
     }
 
-    public function destroy() {
-        //
+    public function destroy(Job $job) {
+        $job->delete();
+        return redirect('/jobs');
     }
 }
