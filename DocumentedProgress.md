@@ -114,7 +114,7 @@ Props - anything that is not an attribute,
 Differenciate between strings and booleans
     'false' = string
     :'false' = boolean
-        >> When prefixing prop names.
+        >> When prefixingt prop names.
 
 Can also create a @php directive (with @endphp)
     Within here, some conditionals can be set.
@@ -1983,3 +1983,14 @@ Note:
 index, show, create, update, delete, edit, store...
 These are all `ACTIONS`.
 NOT "METHODS"
+
+```
+Route::get('/', function () {
+    return view('home');
+})->name('home');
+```
+Can be shortened down to
+```
+Route::view('/', 'home')->name('home');
+```
+Since it just returns a view

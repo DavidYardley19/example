@@ -2,7 +2,6 @@
     <x-slot:heading>
         Jobs Page
     </x-slot:heading>
-    {{ $greeting }} My name is {{ $name }}
     
     <div class="gap-4 flex flex-col">
         @foreach ($jobs as $job)

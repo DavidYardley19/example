@@ -3,16 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
-
-Route::get('/contact', function () {
-    return view('contact', [
-        'greeting' => 'Hello, welcome to the contact page!',
-        'name' => 'DavBot'
-    ]);
-})->name('contact');
+Route::view('/', 'home')->name('home');
+Route::view('/contact', 'contact')->name('contact');
 
 Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
 Route::get('/jobs/create', [JobController::class, 'create'])->name('job');

@@ -10,11 +10,6 @@ class JobController extends Controller
         $jobs = Job::with('employer')->latest()->simplePaginate(3);
 
         return view('jobs.index', [
-            'greeting' => 'Hello, welcome to the jobs page!',
-            'name' => 'DavBot',
-
-            // 'jobs' => Job::all()
-            // replace the above with this:
             'jobs' => $jobs
         ]);
     }
