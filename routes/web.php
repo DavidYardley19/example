@@ -6,12 +6,15 @@ use App\Http\Controllers\JobController;
 Route::view('/', 'home')->name('home');
 Route::view('/contact', 'contact')->name('contact');
 
-Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
-Route::get('/jobs/create', [JobController::class, 'create'])->name('job');
-Route::get('/jobs/{job}', [JobController::class, 'show'])->name('job');
-Route::post('/jobs', [JobController::class, 'store'])->name('job');
-Route::get('/jobs/{job}/edit', [JobController::class, 'edit'])->name('job');
-Route::patch('/jobs/{job}', [JobController::class, 'update'])->name('job');
-Route::delete('/jobs/{job}', [JobController::class, 'destroy'])->name('job');
+Route::controller(JobController::class)->group(function () {
+    Route::get('/jobs', 'index')->name('jobs.index');
+    Route::get('/jobs/create', 'create')->name('jobs.create');
+    Route::get('/jobs/{job}', 'show')->name('jobs.show');
+    Route::post('/jobs', 'store')->name('jobs.store');
+    Route::get('/jobs/{job}/edit', 'edit')->name('jobs.edit');
+    Route::patch('/jobs/{job}', 'update')->name('jobs.update');
+    Route::delete('/jobs/{job}', 'destroy')->name('jobs.destroy');
+});
+
 
 

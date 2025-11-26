@@ -1994,3 +1994,67 @@ Can be shortened down to
 Route::view('/', 'home')->name('home');
 ```
 Since it just returns a view
+
+To see all routes, use
+`php artisan route:list`
+NOTE: vendor routes will also be listed
+You can filter with the following:
+`php artisan route:list`
+
+SEE before:
+```
+C:\Users\david\Herd\example>php artisan route:list     
+
+  GET|HEAD   / .................................................................................... home
+  POST       _boost/browser-logs .................................................... boost.browser-logs
+  GET|HEAD   _debugbar/assets/javascript ... debugbar.assets.js › Barryvdh\Debugbar › AssetController@js
+  GET|HEAD   _debugbar/assets/stylesheets debugbar.assets.css › Barryvdh\Debugbar › AssetController@css   
+  DELETE     _debugbar/cache/{key}/{tags?} debugbar.cache.delete › Barryvdh\Debugbar › CacheController@…  
+  GET|HEAD   _debugbar/clockwork/{id} debugbar.clockwork › Barryvdh\Debugbar › OpenHandlerController@cl…  
+  GET|HEAD   _debugbar/open .... debugbar.openhandler › Barryvdh\Debugbar › OpenHandlerController@handle  
+  POST       _debugbar/queries/explain debugbar.queries.explain › Barryvdh\Debugbar › QueriesController…  
+  GET|HEAD   contact ........................................................................... contact  
+  GET|HEAD   jobs ........................................................... jobs › JobController@index  
+  POST       jobs ............................................................ job › JobController@store  
+  GET|HEAD   jobs/create .................................................... job › JobController@create  
+  GET|HEAD   jobs/{job} ....................................................... job › JobController@show  
+  PATCH      jobs/{job} ..................................................... job › JobController@update  
+  DELETE     jobs/{job} .................................................... job › JobController@destroy  
+  GET|HEAD   jobs/{job}/edit .................................................. job › JobController@edit  
+  GET|HEAD   storage/{path} .............................................................. storage.local  
+  GET|HEAD   up ........................................................................................  
+
+                                                                                     Showing [18] routes 
+```
+
+SEE AFTER:
+```
+GET|HEAD   / .................................................................................... home
+  GET|HEAD   contact ........................................................................... contact  
+  GET|HEAD   jobs ........................................................... jobs › JobController@index  
+  POST       jobs ............................................................ job › JobController@store  
+  GET|HEAD   jobs/create .................................................... job › JobController@create  
+  GET|HEAD   jobs/{job} ....................................................... job › JobController@show  
+  PATCH      jobs/{job} ..................................................... job › JobController@update  
+  DELETE     jobs/{job} .................................................... job › JobController@destroy  
+  GET|HEAD   jobs/{job}/edit .................................................. job › JobController@edit  
+
+                                                                                      Showing [9] routes  
+```
+
+TIP:
+To avoid repeating the controller name, over and over and over
+and over..
+
+Use the following code
+```
+Route::controller(JobController::class)->group(function () {
+    Route::get('/jobs', 'index')->name('jobs.index');
+    Route::get('/jobs/create', 'create')->name('jobs.create');
+    Route::get('/jobs/{job}', 'show')->name('jobs.show');
+    Route::post('/jobs', 'store')->name('jobs.store');
+    Route::get('/jobs/{job}/edit', 'edit')->name('jobs.edit');
+    Route::patch('/jobs/{job}', 'update')->name('jobs.update');
+    Route::delete('/jobs/{job}', 'destroy')->name('jobs.destroy');
+});
+```
