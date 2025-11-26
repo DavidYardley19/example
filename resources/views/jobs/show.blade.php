@@ -7,11 +7,10 @@
         {{ $job['title'] }} - Pays {{ $job->salary }} per year
     </h2>
 
-    <p class="mt-4">
+    <div class="mt-4">
         <!-- below is using an id -->
         <!-- <x-button href="/jobs/{{ $job['id'] }}/edit">Edit Job</x-button> -->
         <x-button href="/jobs/{{ $job->id }}/edit">Edit Job</x-button>
-
-    </p>
+    </div>
 
 </x-layout>
