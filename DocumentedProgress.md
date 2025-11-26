@@ -1815,3 +1815,19 @@ BLADE DIRECTIVE to signal to laravel what request type we want
         @method('PATCH')
 ```
 You need @method to do this
+
+Set up button to delete
+styling added so it appears to the left of cancel and submit.
+Created a new form at the very bottom (hid this)
+Needs to have an id appended
+```
+    <form id="delete-form" method="POST" action="/jobs/{{ $job['id'] }}" class="hidden">
+        @csrf
+        @method('DELETE')
+        <!-- will sort this out in the routes file -->
+    </form>
+```
+This id needs to correspond with a form attribute in the button
+```
+                <button form="delete-form" class="text-red-500 text-sm font-semibold">Delete</button>
+```
