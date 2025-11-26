@@ -2088,3 +2088,14 @@ Route::resource('jobs', JobController::class, [
 
 // you can use only if you wish
 ```
+
+"Resource handled by dedicated controller class"
+Follow the function names to a T... for other controllers.
+There are 7 of them
+* index
+* create
+* show
+* store
+* edit
+* update
+* destroy
