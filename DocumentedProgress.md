@@ -1682,3 +1682,136 @@ COMPLETED
 ## Ep 18 - Editing, Updating and Deleting a Resource (20m31s)
 Chonky ep
 ### Quick Summary
+
+Focus = editing, updating, deleting resources in Laravel.
+Complete core CRUD operations for our jobs resource.
+
+Add routes and views: editing and updating jobs.
+Use PATCH for update,
+use DELETE for deletion requests.
+Validating input before updating.
+Handle deletion with seperate form and button.
+Complete CRUD cycle (Create read update delete).
+
+### Pre Notes
+#### Adding an Edit Button
+Add an Edit Job button
+    using reusable button component, that we already made.
+
+Position and style appropriately.
+
+#### Defining the Edit Route
+Add GET route (editing job)
+
+```
+Route::get('/jobs/{id}/edit', function ($id) {
+    // Return edit view with job data
+});
+```
+Create edit.blade.php view
+    similar to create form
+pre-populate inputs with current job data
+
+#### Updating a Job
+Add PATCH route
+    handle form submits for updates
+
+```
+Route::patch('/jobs/{id}', function (Request $request, $id) {
+    $request->validate([
+        'title' => 'required|min:3',
+        'salary' => 'required',
+    ]);
+
+    $job = Job::findOrFail($id);
+    $job->update([
+        'title' => $request->input('title'),
+        'salary' => $request->input('salary'),
+    ]);
+
+    return redirect("/jobs/{$id}");
+});
+```
+Blades directive `@method('PATCH')`
+    in form > spoofs http verb
+    Since browser only support GET and POST
+
+#### Deleting a Job
+add DELETE route 
+    to handle job deletion
+```
+Route::delete('/jobs/{id}', function ($id) {
+    $job = Job::findOrFail($id);
+    $job->delete();
+
+    return redirect('/jobs');
+});
+```
+Since forms cant be nested
+    create a seperate hidden form
+        for deletion
+    and link a button to sub,it it using the form attribute.
+
+### Practical Notes
+
+Added a route to update details
+```
+Route::get('/jobs/{id}/edit', function ($id) {
+    $job = Job::find($id);
+    return View('jobs.edit', ['job' => $job]);
+})->name('job');
+```
+
+Copied create.blade.php (jobs dir) and pasted in same place, renamed copy to edit.blade.php
+Here, amended some ui
+Cancel button sends user to the job page for that id again.
+Need to sort out the submit button now.
+
+Get - getting a page
+post - common for submitting a form that stores data in db
+Browser only supports these two natively.
+
+Need to focus on other two
+PATCH - update resource
+DELETE - destroying resource
+
+PATCH:
+Exact same as show, but changed the method. So its completely different
+```
+// update (uses same uri as show, but different method)
+Route::patch('/jobs/{id}', function ($id) {
+    $job = Job::find($id);
+    return View('jobs.show', ['job' => $job]);
+})->name('job');
+```
+
+Can do the same for delete
+
+Take out the code on the inside!
+
+WARNING:
+When using `$job = Job::find($id);`
+If that id doesnt exist, it will return null.. which is fine until you try other operations on that..
+Then it blows up!
+    not literally, but imagine.
+It is good practice to use `findOrFail` instead
+
+Can shorten code down without creating seperate variables.. may save processing power/ mem
+```
+    // authorise request
+    $job = Job::findOrFail($id);
+    // delete job
+    $job->delete();
+```
+TURNS INTO
+```
+Job::findOrFail($id)->delete();
+```
+
+BLADE DIRECTIVE to signal to laravel what request type we want
+```
+    <form method="POST" action="/jobs/{{ $job['id'] }}">
+        @csrf
+        @method('PATCH')
+```
+You need @method to do this

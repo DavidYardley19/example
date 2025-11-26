@@ -10,6 +10,7 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
+// index
 Route::get('/jobs', function () {
 
     $jobs = Job::with('employer')->latest()->simplePaginate(3);
@@ -25,17 +26,19 @@ Route::get('/jobs', function () {
     ]);
 })->name('jobs');
 
-// need a route for job: adding a job
+// create
 Route::get('/jobs/create', function(){
 
     return view('jobs.create');
 });
 
+//show
 Route::get('/jobs/{id}', function ($id) {
     $job = Job::find($id);
     return View('jobs.show', ['job' => $job]);
 })->name('job');
 
+// store
 Route::post('/jobs', function () {
 
     // validate the incoming request data >> So you don't have to do "required" in the HTML form
@@ -57,6 +60,49 @@ Route::post('/jobs', function () {
 
     return redirect('/jobs');
 });
+
+// edit
+Route::get('/jobs/{id}/edit', function ($id) {
+    $job = Job::find($id);
+    return View('jobs.edit', ['job' => $job]);
+})->name('job');
+
+// update (uses same uri as show, but different method)
+Route::patch('/jobs/{id}', function ($id) {
+    // validae request
+    request()->validate([
+        'title' => ['required', 'min:3'],
+        // min 3 means minimum 3 characters
+        'salary' => 'required'
+    ]);
+    // authorise request - must be by person who created the job - later when auth is set up
+
+    // update job
+    $job = Job::findOrFail($id); // find returns null if not found... can swap with findOrFail to throw 404 error
+
+
+        //can set up props individually
+        // $job->title = request('title');
+        // $job->salary = request('salary');
+        // $job->save();
+
+        // can also leverage job update
+        $job->update(request()->only(['title', 'salary']));
+
+    // redirect to jobs page so you can see changes take effect
+    return redirect('/jobs/' . $job->id);
+
+})->name('job');
+
+// destroy
+Route::delete('/jobs/{id}', function ($id) {
+    // authorise request
+    $job = Job::findOrFail($id);
+    // delete job
+    $job->delete();
+    //redirect - send back to index
+    return redirect('/jobs');
+})->name('job');
 
 Route::get('/contact', function () {
     return view('contact', [
