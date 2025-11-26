@@ -1957,4 +1957,17 @@ They will assist with building applications that are SCALABLE + MAINTAINABLE.
 Will focus authentication NEXT episode!
 
 ### Practical Notes
+```
+Route::get('/jobs/{job}', function (Job $job) {
+    return View('jobs.show', ['job' => $job]);
+})->name('job');
+```
+Convention followed
+Wildcard and function name = identical
+added a type to the functions param...
+Need to tell it you're passing an instance, not a string.
+Since they match, the wildcard provides the ID
 
+If they dont have an id... sayyyyy... posts.
+They usually come with a slug.
+So you will need to use `Route::get('/jobs/{job:slug}', function (Job $job) {`

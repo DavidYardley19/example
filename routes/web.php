@@ -33,8 +33,7 @@ Route::get('/jobs/create', function(){
 });
 
 //show
-Route::get('/jobs/{id}', function ($id) {
-    $job = Job::find($id);
+Route::get('/jobs/{job}', function (Job $job) {
     return View('jobs.show', ['job' => $job]);
 })->name('job');
 
@@ -62,45 +61,25 @@ Route::post('/jobs', function () {
 });
 
 // edit
-Route::get('/jobs/{id}/edit', function ($id) {
-    $job = Job::find($id);
+Route::get('/jobs/{job}/edit', function (Job $job) {
     return View('jobs.edit', ['job' => $job]);
 })->name('job');
 
 // update (uses same uri as show, but different method)
-Route::patch('/jobs/{id}', function ($id) {
-    // validae request
+Route::patch('/jobs/{job}', function (Job $job) {
+    // authorise needed here
     request()->validate([
         'title' => ['required', 'min:3'],
-        // min 3 means minimum 3 characters
         'salary' => 'required'
     ]);
-    // authorise request - must be by person who created the job - later when auth is set up
-
-    // update job
-    $job = Job::findOrFail($id); // find returns null if not found... can swap with findOrFail to throw 404 error
-
-
-        //can set up props individually
-        // $job->title = request('title');
-        // $job->salary = request('salary');
-        // $job->save();
-
-        // can also leverage job update
+    
         $job->update(request()->only(['title', 'salary']));
-
-    // redirect to jobs page so you can see changes take effect
     return redirect('/jobs/' . $job->id);
 
 })->name('job');
 
-// destroy
-Route::delete('/jobs/{id}', function ($id) {
-    // authorise request
-    $job = Job::findOrFail($id);
-    // delete job
+Route::delete('/jobs/{job}', function (Job $job) {
     $job->delete();
-    //redirect - send back to index
     return redirect('/jobs');
 })->name('job');
 
