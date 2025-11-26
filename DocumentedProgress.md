@@ -1836,3 +1836,125 @@ AUTHENTICATION chapter will discuss issues rn
 ANYONE can update or delete jobs... Not ideal for most/ nearly every scenario.
 
 Essence of CRUD completed.
+
+## Ep 19 - Routes Reloaded - 6 Essential Tips (16m 33s)
+
+### Quick Summary 
+Focus = improving routes file
+Tips, techniques
+Keep it clean, maintainable, efficient
+
+### Pre Notes:
+#### 1. Route Model Binding
+Instead of manually fetching models by ID in route closures
+    laravel can offer route model binding.
+        this automatically injects model instances based on route parameters.
+
+CHANGE this:
+```
+Route::get('/jobs/{id}', function ($id) {
+    $job = Job::findOrFail($id);
+    // ...
+});
+```
+TO this:
+```
+Route::get('/jobs/{job}', function (Job $job) {
+    // $job is automatically resolved by Laravel
+});
+```
+
+KEY POINTS:
+* route param name ({job}) MUST match variable name in the closure.
+* Laravel uses the models PK (id = default) to fetch the record.
+* Specify different column (slug) by adding `:slug` to the route param
+
+UPDATE ALL routes to use route model binding
+    for cleaner code
+
+#### 2. Dedicated Controller Classes
+LARGER APPLICATIONS
+managing many routes with closures becomes a lot
+
+Instead, use controller classes
+    here you can organise route logic
+
+Generate a controller
+`php artisan make:controller JobController`
+
+Move route logic in here like:
+* index
+* show
+* create
+* store
+* edit
+* update
+* destroy
+
+Update routes to reference controller actions
+```
+use App\Http\Controllers\JobController;
+
+Route::get('/jobs', [JobController::class, 'index']);
+Route::get('/jobs/create', [JobController::class, 'create']);
+// etc.
+```
+
+#### 3. Route View Shortcut
+For simple routes (only rtrn a view/ static pages)
+Use `Route::view`
+See example
+`Route::view('/contact', 'contact');`
+WHY?
+This avoids creating unnecesassary closures/ controller methods
+
+#### 4. Listing Routes
+artisan can list all routes
+`php artisan route:list`
+
+Exclude vendor routes to focus on YOUR app routes
+`php artisan route:list --except=vendor`
+WHY
+This assists with auditing and managing routes effectively
+
+#### 5. Route Grouping with Controllers
+REDUCES REPETITION
+REDUCES REPETITION
+REDUCES R... Alright you get it now.
+
+Group the routes by controller
+See code:
+```
+Route::controller(JobController::class)->group(function () {
+    Route::get('/jobs', 'index');
+    Route::get('/jobs/create', 'create');
+    // other routes...
+});
+```
+WHY
+This cleans up routes file
+    makes it easier to maintain.
+
+#### 6. Route Resource
+Laravel gives a method to register all standard resource routes
+    all at once
+`Route::resource('jobs', JobController::class);`
+
+This registers routes for index, create, store, show, edit, update, destroy
+    Following RESTful convenitions
+
+Limit/exclude specific actions
+See code:
+```
+Route::resource('jobs', JobController::class)->except(['edit']);
+Route::resource('jobs', JobController::class)->only(['index', 'show', 'create', 'store']);
+```
+
+#### OUTLINE/ TIP
+Practice these techniques often.
+They will assist with building applications that are SCALABLE + MAINTAINABLE.
+
+Will focus authentication NEXT episode!
+
+### Practical Notes
+
