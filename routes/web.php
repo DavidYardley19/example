@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Job;
+use App\Http\Controllers\JobController;
 
 Route::get('/', function () {
     return view('home', [
@@ -11,20 +12,7 @@ Route::get('/', function () {
 })->name('home');
 
 // index
-Route::get('/jobs', function () {
-
-    $jobs = Job::with('employer')->latest()->simplePaginate(3);
-
-    
-    return view('jobs.index', [
-        'greeting' => 'Hello, welcome to the jobs page!',
-        'name' => 'DavBot',
-
-        // 'jobs' => Job::all()
-        // replace the above with this:
-        'jobs' => $jobs
-    ]);
-})->name('jobs');
+Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
 
 // create
 Route::get('/jobs/create', function(){
@@ -72,7 +60,7 @@ Route::patch('/jobs/{job}', function (Job $job) {
         'title' => ['required', 'min:3'],
         'salary' => 'required'
     ]);
-    
+
         $job->update(request()->only(['title', 'salary']));
     return redirect('/jobs/' . $job->id);
 
