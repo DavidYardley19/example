@@ -2183,3 +2183,75 @@ Create the project first then determine that breeze is a required... package?
 
 WORKS!
 Going to call it a night. Sleep's not going well lately.
+
+#### Practical Notes extended
+
+registered a mock user
+email = test@gmail.com
+pw = 12345678
+
+when visiting dashboard
+http://breezedemo.test/dashboard
+
+try to log out and visit this url again
+this doesnt work!
+It automatically redirects me to login page
+this is right.
+
+Initially can be overwhelming because of all the files..
+But this is necessary
+USE this as an educational resource
+This is what laravel core recommends.
+
+Theres a controller to control a view to register.
+Heavy use of blade comps
+    for layout
+    inputs
+    labels
+
+When submitting reg form, it hits some logic (with param called $request)
+Validates this
+    tries to create a user
+    Deals with events here - not quite caught uo to this yet
+
+HOW did the core team ensure that not loged in users deal with what you see
+Check web.php
+    see route::get(dashboard... function..)
+    it returns a view to the daashboard
+        but
+        ...
+        BUT..
+        it INCLUDES middleware
+
+middleware sounds low level, technical, serious..
+But its not scary.
+Middleware = layers of an onion that lead to the core
+they have an opportunity to do something
+    record something in db
+    check for header
+    check for session to see if youre signed in..
+        or if you're a guest..!
+
+So if you're a guest and you try to view dashboard...
+    it will fail.
+    But the middleware can 
+
+Auth class with user method
+
+Middleware can contain a single string or an array of strings.
+`->middleware('auth')->name('dashboard');`
+
+HOMEORK:
+Go into controllers:
+    get comfortable
+    let files wash over you 
+    get an idea on how seasoned devs constructs this
+Then go into resources
+    how are these organised
+    components
+    layouts
+    EVERYTHING is open source so you can swipe any of these.
+
+STARTER KITS ARE MEANT TO BE USED AT THE START OF A PROJECT
+
+next time: we learn to set up authentication from scratch.
