@@ -2340,4 +2340,14 @@ EXAMPLE use for @guest:
 
 ### Practical Notes
 
-2
+Created 3 components:
+    for labels, errors and inputs.
+This makes it easier in the future when creating new forms as we can just use the blade comps and pass in unique information there.
+
+Next step, creating a blade component called form-field.
+WHY?
+Well, we can combine the three of them.
+    But a little puzzled with how all these different attributes for each html element will be passed in.
+    Got this idea of 1 in 1 out functionality stuck in my head.
+
+TIMESTAMP: Break - will move away and into another module for 45 mins.
