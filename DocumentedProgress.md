@@ -2255,3 +2255,89 @@ Then go into resources
 STARTER KITS ARE MEANT TO BE USED AT THE START OF A PROJECT
 
 next time: we learn to set up authentication from scratch.
+
+## Ep 21 - Make a Login and Registration System From Scratch: Part 1 (17m 49s)
+
+### Quick Summary
+
+Manually implementing our own reg and login forms
+    including form comps, validation and auth links
+
+Reuse form comps for clean maintainable forms
+Define routes and controllers for authentication actions
+Blade directives used to conditionally display nav links
+Implement client/server side validation for forms.
+
+(next ep - covers more adv authenticaion logic)
+
+### Pre Notes
+#### Extracting Form Components
+Reusable blade comps to build forms efficiently.
+LABELS - form-label.blade.php
+VALIDATION ERRORS - form-error.blade.php
+INPUT FIELDS - form-input.blade.php
+
+All comps acept attributes + slots.
+    makes them flexible to provided data.
+    Keeps things DRY.
+
+Example usage:
+```
+<x-form-label for="title">Title</x-form-label>
+<x-form-input id="title" name="title" required />
+<x-form-error name="title" />
+```
+
+#### Building Registration and Login Forms
+Create the following VIEWS under the `auth` dir
+    register.blade.php
+    login.blade.php
+
+Use comps to build inputs for:
+    first name,
+    last name,
+    email,
+    password,
+    password confirmation.
+
+append required for client side validation
+    attribute for the input fields.
+
+#### Defining Authentication Routes and Controllers
+In web.php > add routes for showing reg/login forms
+    GET /register >>> GET /login
+
+Also add routes for handling form submits:
+    POST /register >>> POST /login
+
+Create corresponding controllers
+    Recall prev session where routes can be collected in one place. This will make the routes file (web.php) much cleaner.
+Names may include:
+    RegisteredUserController
+    SessionController
+
+You must add the following methods:
+1. create
+2. store.
+
+#### Displaying Authentication Links Conditionally
+Utilise blade directives (keyword: @guest)
+    This will show login and reg links ONLY to guests.
+    IF someone is determined as already logged in, they should ideally be directed right to the dashboard immediately when they request it.
+        NOTE: this may not be ideal in some scenarios
+        - THINK : HSBC online banking.
+
+Like @guest... the opposite can be appended.
+@auth can be used to show content only to authenticated users.
+
+EXAMPLE use for @guest:
+```
+@guest
+    <x-nav-link href="/login">Login</x-nav-link>
+    <x-nav-link href="/register">Register</x-nav-link>
+@endguest
+```
+
+### Practical Notes
+
+2
