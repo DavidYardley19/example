@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI_Usage</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Jura:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+        body {
+            font-family: "Jura", sans-serif;
+            width: 95vw;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .answer_required {
+            font-family: "Montserrat", sans-serif;
+            font-style: italic;
+            font-weight: 500;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        /* ai page */
+        #ai .card {
+            background-color:#e7e5e4;
+            border-radius: 4px;
+            border: 1px solid #dbdbdb;
+            color: #363636;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        #ai .card-header {
+            background-color: #57534d;
+            border-bottom: 1px solid #dbdbdb;
+            border-radius: 4px 4px 0 0;
+            color: #f1f5f9;
+            font-weight: 700; 
+            font-size: 1rem;            
+            padding: 0.75em 1em;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        #ai .card-body {
+            padding: 1em 1em;         
+            color: #4a4a4a;
+        }
+        #ai > h1 {
+            font-family: "Montserrat", sans-serif;
+            font-weight: 700;
+            border-bottom: #222525 2px solid;     
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 1.5em;
+        }
+    </style>
+</head>
+<body>
+<section id="ai">
+		<h1>Summary and Reflection on Artificial Intelligence (AI) Usage</h1>
+
+        <div class="card" style="background-color: #fbfbfb; border-radius: 6px; border: 1px solid #dbdbdb; margin-bottom: 1.5rem; padding: 1em;">
+            <div class="card-body">
+                <p>
+                    <span class="answer_required">Please provide a list of the AI prompts used to assist
+                        in the creation of your assignment, along with a brief reflection on how the AI response
+                        helped (or not) your understanding. If you did not use AI, please state "No AI used".
+                    </span>
+                </p>
+                <p>
+                    <span class="answer_required">Please note that the list does not need to
+                        include every minor prompt, but should cover the main prompts that 
+                        significantly influenced and assisted you in your assignment.
+                    </span>
+                </p>
+                <p>
+                    <span class="answer_required">Please create a new card for each prompt
+                        used, detailing the prompt, a summary of the AI's response, and your 
+                        reflection on its usefulness. Please also include the date when the prompt
+                        was made.
+                    </span>
+                </p>
+                <p>
+                    <span class="answer_required">Please commit regularly to GIT - 
+                        so that the date can be verified. While the exact date of the commit
+                        may not match the date of the prompt, it should be close enough to
+                        provide a reasonable estimate of when the prompt was made. 
+                        </span>
+                </p>
+                <p>
+                    <span class="answer_required">Completing this 
+                        page at the end will not be acceptable.
+                    </span>
+                </p>
+            </div>
+        </div>
+
+		<div class="card">
+            <div class="card-header">
+                <p>Prompt:             
+                    <span class="answer_required" style="color: #f1f5f9;">
+                        How to escape a git log
+                    </span>
+                </p>
+                <p>Date: 10-11-2025</p>
+            </div>
+            <div class="card-body">
+                <p>
+                    <span class="answer_required">press q</span>
+                </p>
+            </div>
+	    </div>
+
+		<div class="card">
+            <div class="card-header">
+                <p>Prompt:             
+                    <span class="answer_required" style="color: #f1f5f9;">
+                        How to see changes in file with git
+                    </span>
+                </p>
+                <p>Date: 10-11-2025</p>
+            </div>
+            <div class="card-body">
+                <p>
+                    <span class="answer_required">git diff</span>
+                </p>
+            </div>
+	    </div>
+
+		<div class="card">
+            <div class="card-header">
+                <p>Prompt:             
+                    <span class="answer_required" style="color: #f1f5f9;">
+                        Whats the difference between npm run dev and npm run build
+                    </span>
+                </p>
+                <p>Date: 10-11-2025</p>
+            </div>
+            <div class="card-body">
+                <p>
+                    <span class="answer_required">
+                        Npm run dev = runs build tool in watch mode for local dev (vite in this case)
+                        Compiles css js assets quickly
+                        Hot modular replacement
+                        Outputs readable source maps
+
+                        Npm run build = focus on deployment, production servers
+                        Gen versioned (hashed) filenames
+                        Removes debugging helpers and source maps
+                    </span>
+                </p>
+            </div>
+	    </div>
+
+        		<div class="card">
+            <div class="card-header">
+                <p>Prompt:             
+                    <span class="answer_required" style="color: #f1f5f9;">
+                        whats the benefit of using denyAsNotFound() over denyWithStatus(404)
+                        context: Laravel php web dev
+                    </span>
+                </p>
+                <p>Date: 17-11-2025</p>
+            </div>
+            <div class="card-body">
+                <p>
+                    <span class="answer_required">
+                        denyAsNotFound - This prevents unauthorized users from learning whether a resource exists.
+                        Useful for multi-tenant apps, sensitive data, endpoints where access denied could leak information.
+                        Clear policy intent - resource is not found for unauthorized users.
+                        Shows as an authorization failure (403) in logs/monitoring.
+
+                        denyWithStatus(404) - This simply returns a 404 status code. (GENERIC REJECTION)
+                            This is not recognised as an authorization failure, treated like anuy other http error.
+                    
+                        Good to know for security... *smiley face*    
+                    </span>
+                </p>
+            </div>
+	    </div>
+
+        <div class="card">
+            <div class="card-header">
+                <p>Prompt:             
+                    <span class="answer_required" style="color: #f1f5f9;">
+                        can you have components with standard html tag names like h1, main, b, p, etc...
+                        As long as we have x-... then its fine right?
+                    </span>
+                </p>
+                <p>Date: 18-11-2025</p>
+            </div>
+            <div class="card-body">
+                <p>
+                    <span class="answer_required">yes, its fine
+                        its a common pattern.
+                        
+                        I followed up with "so its not bad practice"
+                        response = its well established and encouraged.
+                        semantic clarity.
+                        consistency enforced.
+                        Maintainability.
+                        flexibility (custom logic, styles, slots)
+
+                        Popular "in the wild"
+                        jetstream, livewire, alpinejs, tailwind
+                    </span>
+                </p>
+            </div>
+	    </div>
+
+		<div class="card">
+            <div class="card-header">
+                <p>Prompt:             
+                    <span class="answer_required" style="color: #f1f5f9;">
+                        Needed support when working with a tailwindui website component.
+                        Copied free example but styles were not applying correctly.
+                        what needs changing to make this work? ignore the comment about custom content
+                    </span>
+                </p>
+                <p>Date: 18-11-2025</p>
+            </div>
+            <div class="card-body">
+                <p>
+                    <span class="answer_required">
+                        Key Changes Made:
+                        ✅ Added proper HTML structure - DOCTYPE, html, head, and body tags
+                        ✅ Added $slot variable - This is where your page content will be inserted
+                        ✅ Made title dynamic - Uses $title prop or defaults to "Website"
+                        ✅ Made heading dynamic - Uses $heading or falls back to $title
+                        ✅ Added Vite assets - Includes your CSS/JS compilation
+                        ✅ Fixed navigation links - Now uses Laravel route() helpers
+                        ✅ Added named routes - Updated web.php to support route('home'), etc.
+                    </span>
+                </p>
+            </div>
+	    </div>        
+
+		<div class="card">
+            <div class="card-header">
+                <p>Prompt:             
+                    <span class="answer_required" style="color: #f1f5f9;">
+                        Wanted to know what the purpose of aria-current was.
+                        I could do the following: aria-current="{{ request()->routeIs('home') ? 'page' : '' }}">
+                        But did not understand fully what it meant.
+                    </span>
+                </p>
+                <p>Date: 19-11-2025</p>
+            </div>
+            <div class="card-body">
+                <p>
+                    <span class="answer_required">
+                        First off- do not confuse this with laravel features. It's actually a HTML attribute used for accessibility.
+                        aria-current indicates the current item within a set of related elements, like navigation links.
+
+                        "It tells assisting technologies - this is the link representing the CURRENT page"
+                            Sooo... that line of code checks if the requesst route matches 'home'. If it does, it sets aria-current to 'page', indicating this link is for the current page. If not, it sets it to an empty string.
+                    
+                        Example: a href="/dashboard" aria-current="page">Dashboard /a
+                            This tells screen readers that "Dashboard" is the current page.
+
+                        NOTE: not good to just return true or false. It's not a bool attribute.
+                            Spec defined valid values like page, step, location, date, time, true (generic). false(means not current).
+
+                        </span>
+                </p>
+            </div>
+	    </div>
+
+        <div class="card">
+            <div class="card-header">
+                <p>Prompt:             
+                    <span class="answer_required" style="color: #f1f5f9;">
+                        I'm aware you can prefix a prop name with a colon to help identify them as booleans instead of strings.
+                        Is this JUST for props?
+                    </span>
+                </p>
+                <p>Date: 10-11-2025</p>
+            </div>
+            <div class="card-body">
+                <p>
+                    <span class="answer_required">yes - ONLY FOR BLADE COMPONENT PROPS</span>
+                </p>
+            </div>
+	    </div>
+
+    	<div class="card">
+            <div class="card-header">
+                <p>Prompt:             
+                    <span class="answer_required" style="color: #f1f5f9;">
+                        Created a jobs variable which was a list of elements containing a title and salary.
+                        No issues seemed to be flagged.
+                        Tried to run a foreach with blade directives, no syntax errors other than li tags needing a wrapping ol or ul... thats fine.
+                        Get an error: "Undefined constant title" ... what does this mean?
+                    </span>
+                </p>
+                <p>Date: 19-11-2025</p>
+            </div>
+            <div class="card-body">
+                <p>
+                    <span class="answer_required">
+                        Simple mistake, but one I will remember
+                        The response is that my current code contains array keys that look like this:
+                            title => 'Web developer'
+                        When it SHOULD look like this:
+                            'title' => 'web developer'
+                        
+                        Simple mistake again.
+                        Need to look into some sort of checking tool or change the colours because it can be hard to identify sometimes
+                            On the lines of eslint? > Remember using this for react related stuff.
+
+                        WHY THIS ISSUE AROSE.
+                            PHP thinks title is a constant,
+                                since you havent defined a title constant, it throws an exception
+                            With quotes, PHP knows this is a string key
+                    </span>
+                </p>
+            </div>
+	    </div>
+
+        <div class="card">
+            <div class="card-header">
+                <p>Prompt:             
+                    <span class="answer_required" style="color: #f1f5f9;">
+                        Wanted to know the exact name of these variables i set in one of the route files.
+                        such as 'greeting', 'name', 'jobs'
+                        and some extra information
+                    </span>
+                </p>
+                <p>Date: 19-11-2025</p>
+            </div>
+            <div class="card-body">
+                <p>
+                    <span class="answer_required">
+                        Called view data / template data
+                        Accessed in blade templates prefixed with a $ sign
+                        Not just for compact variables, but for model data and props
+                    </span>
+                </p>
+            </div>
+	    </div>
+
+		<div class="card">
+            <div class="card-header">
+                <p>Prompt:             
+                    <span class="answer_required" style="color: #f1f5f9;">
+                        use app\models\job
+                        This line was used to use a class from another section in the filesystem.
+                        There were issues with the code but the error message did not help - it was pointing to a different part in the file!
+                    </span>
+                </p>
+                <p>Date: 19-11-2025</p>
+            </div>
+            <div class="card-body">
+                <p>
+                    <span class="answer_required">
+                        There was no issue this using statement at the top, because it just failed.. There was no app\models\Job
+                        It was just a semantic issue... logical error? I needed to use upper case
+                        use App\Models\Job
+                    </span>
+                </p>
+            </div>
+	    </div>
+
+		<div class="card">
+            <div class="card-header">
+                <p>Prompt:             
+                    <span class="answer_required" style="color: #f1f5f9;">
+                        What are the top 15 most popular php artisan commands. Targetted towards smaller projects for final year university students.
+                        Please keep descriptions simple
+                    </span>
+                </p>
+                <p>Date: 20-11-2025</p>
+            </div>
+            <div class="card-body">
+                <p>
+                    <span class="answer_required">
+                        1. Development Server
+                            php artisan serve - Start local development server
+                        2. Database & Migrations
+                            php artisan migrate - Run database migrations
+                            php artisan migrate:rollback - Undo last migration
+                            php artisan migrate:fresh - Drop all tables and re-run migrations
+                            php artisan make:migration - Create new migration file
+                        3. Models & Controllers
+                            php artisan make:model - Create new model
+                            php artisan make:controller - Create new controller
+                            php artisan make:model -mc - Create model with migration and controller
+                        4. Database Seeding
+                            php artisan db:seed - Run database seeders
+                            php artisan make:seeder - Create new seeder file
+                        5. Caching & Optimization
+                            php artisan config:cache - Cache configuration files
+                            php artisan config:clear - Clear configuration cache
+                            php artisan route:clear - Clear route cache
+                        6. Debugging & Info
+                            php artisan tinker - Interactive PHP shell for testing
+                            php artisan route:list - Show all registered routes
+                    </span>
+                </p>
+            </div>
+	    </div>
+
+		<div class="card">
+            <div class="card-header">
+                <p>Prompt:             
+                    <span class="answer_required" style="color: #f1f5f9;">
+                        FOLLOWING EP11 LARACAST
+                        
+                        im setting up foreign id's in the attributes for migrations over (comments, users, posts)...
+                        But I dont know which should have a foreignIDfor... and which should just remain blank.
+                        DO NOT WRITE CODE
+                        give me some guidance on best practice
+                    </span>
+                </p>
+                <p>Date: 21-11-2025</p>
+            </div>
+            <div class="card-body">
+                <p>
+                    <span class="answer_required">
+                        comments table NEEDS fk's
+                            who wrote it!
+                            what post does it belong on!
+                        
+                        Other tables will reference the users
+                        NOT the other way around.
+                            You dont typically want to see ALL the comments a user will make for EVERY post...
+
+                        So main outlook:
+                            "ask yourself, does this entity belong to another entity?"
+                                if yes: add a FK
+
+                        Self note: maybe think maths?
+                            The set of irrational numbers CONTAINS an element which may be irrational.
+                                so that specific element BELONGS to the irrational set.
+                        I think I'm complicating this further but the idea is there.
+
+                        OUTLINE:
+                            FK always always always goes on the CHILD that belongs to the parent.
+
+                        Albanian aunties will always ask - who do you belong to.
+                            your FK here is your fathers... birth certificate number, or something. ha! ha. ha :/
+                            I'm losing sleep..
+                    </span>
+                </p>
+            </div>
+	    </div>
+
+		<div class="card">
+            <div class="card-header">
+                <p>Prompt:             
+                    <span class="answer_required" style="color: #f1f5f9;">
+                        what is the meaning of orphaned records? 
+                        When working with pivot tables and you delete an entity that is also an existing FK within the pivot table.
+                    </span>
+                </p>
+                <p>Date: 22-11-2025 </p>
+            </div>
+            <div class="card-body">
+                <p>
+                    <span class="answer_required">
+                        I'm being dumb perhaps.
+                        It's just a named assigned to a record with no valid parent key (Remember that you only assign FK's to the children)
+                            So orphan is a fitting name here.
+
+                        My educational guess is that this is very dangerous for the following reason.
+                            If a user - who makes a hot-topic morally incorrect post, happens to get removed from the platform
+                            And their post remains, containing a FK to a userID
+                            Then another user comes by filling in that ID from poor managed code
+                            That post now appears under their name... Not good.
+
+                        Found this online as "data integity holes"
+
+                        Other pointers from gpt:
+                        Orphaned records can:
+                            Break queries that join tables
+                            Cause inconsistent application logic
+                            Lead to errors when enforcing constraints
+                    </span>
+                </p>
+            </div>
+	    </div>
+
+		<div class="card">
+            <div class="card-header">
+                <p>Prompt:             
+                    <span class="answer_required" style="color: #f1f5f9;">
+                        where can i find Faker stuff? 
+                        'first_name' => fake()->firstName(), 
+                        like that line uses faker from what i understand... Where can I find more functions like firstName ?
+                    </span>
+                </p>
+                <p>Date: 22-11-2025 </p>
+            </div>
+            <div class="card-body">
+                <p>
+                    <span class="answer_required">
+                        https://fakerphp.github.io/formatters/
+                        Person
+                        Address
+                        Phone
+                        Company
+                        Text
+                        Date / Time
+                        Internet
+                        Payment
+                        Color
+                        Barcode
+                        UUID
+                        Images
+                        Lorem
+                        etc.
+
+                        NOTE: all faker docs exist in vendor folder.
+                        vendor/fakerphp/faker/docs/formatters/
+                    </span>
+                </p>
+            </div>
+	    </div>
+
+		<div class="card">
+            <div class="card-header">
+                <p>Prompt:             
+                    <span class="answer_required" style="color: #f1f5f9;">
+                        whats the purpose of php artisan migrate:rollback
+                    </span>
+                </p>
+                <p>Date: 22-11-2025 </p>
+            </div>
+            <div class="card-body">
+                <p>
+                    <span class="answer_required">
+                        runs the down method in the migrations.
+                            we drop the tables here.
+
+                        STORY: had an issue with the cascadeOnDelete() when working in tablePlus...
+                        I must have got this rollback thing wrong, or missed something.. but no code changed so idk.
+                            But still. This fixed the issue, now table plus knows some pivot table attributes ARE FK's
+                            Maybe it was because i did the sql query before doing a rollback migration + migrate?
+                    </span>
+                </p>
+            </div>
+	    </div>
+
+		<div class="card">
+            <div class="card-header">
+                <p>Prompt:             
+                    <span class="answer_required" style="color: #f1f5f9;">
+                        which is faster or takes less memory:
+                        $tag->jobs()->attach(App\Models\Job::find(7))
+                        OR
+                        $tag->jobs()->attach(7)
+                        
+                        Which is most beneficial
+                    </span>
+                </p>
+                <p>Date: 22-11-2025 </p>
+            </div>
+            <div class="card-body">
+                <p>
+                    <span class="answer_required">
+                        just using the id is faster and uses less mem
+                        Becuase there is no search query, you're just adding an id to the pivot table.
+                        The first one does not load the job model
+                    </span>
+                </p>
+            </div>
+	    </div>
+
+		<div class="card">
+            <div class="card-header">
+                <p>Prompt:             
+                    <span class="answer_required" style="color: #f1f5f9;">
+                        Help with identifying documents in code (going to definition)
+                    </span>
+                </p>
+                <p>Date: 23-11-2025 </p>
+            </div>
+            <div class="card-body">
+                <p>
+                    <span class="answer_required">
+                        GPT suggested installing intelephense extension
+                        After this I disabled the php related built in extension that would have conflicted with this
+                        Success - I should have figured this out a long time ago.
+                    </span>
+                </p>
+            </div>
+	    </div>
+
+		<div class="card">
+            <div class="card-header">
+                <p>Prompt:             
+                    <span class="answer_required" style="color: #f1f5f9;">
+                        check all files, do NOT make changes to code.
+                        just advise
+                        on http://example.test/jobs
+                        I can click on a job here, it send me to http://example.test/jobs/63 (for example).
+                        I click on the jobs button/ anchor tag at the top of the nav bar... but it sends me to http://example.test/jobs/jobs
+                        it SHOULD send me to http://example.test/jobs/
+                    </span>
+                </p>
+                <p>Date: 26-11-2025 </p>
+            </div>
+            <div class="card-body">
+                <p>
+                    <span class="answer_required">
+                        Problematic code: 
+                            ```<x-nav-link href="jobs" :active="request()->is('jobs')" type="a">Jobs</x-nav-link>```
+                        
+                        href was set to jobs (relative path)
+                        But when on http://example.test/jobs/63 and usign that relative path...
+                            You're sent to http://example.test/jobs/63/jobs >>> which resolves to http://example.test/jobs/jobs
+                        You need to make it an ABSOLUTE path with a leading slash symbol before jobs.
+                        
+                        Working code:
+                            ```<x-nav-link href="/jobs" :active="request()->is('jobs')" type="a">Jobs</x-nav-link>```
+                    </span>
+                </p>
+            </div>
+	    </div>
+
+		<div class="card">
+            <div class="card-header">
+                <p>Prompt:             
+                    <span class="answer_required" style="color: #f1f5f9;">
+                        Can i create another laravel project that sits in the directory of an existing laravel project without messing anything up ?? 
+                        considered as two seperate projects.. just wanted to have two in the same place for github
+
+                        Additional info: sidenote for episode 20 (laracast)
+                        <blockquote>
+                            SIDENOTE: Not sure if I can just create a new project inside of this one or not... will it mess up with other configuration files?
+                            Maybe if it was in its own folder...
+                            Still, will it mess everything up..?
+                        </blockquote>
+                    </span>
+                </p>
+                <p>Date: 26-11-2025 </p>
+            </div>
+            <div class="card-body">
+                <p>
+                    <span class="answer_required">
+                        short ans: it can be done but dont. Make a seperate repo for this.
+                        Problems can occur
+
+                        <blockquote>
+                            This causes problems because:
+                            Composer autoload paths get mixed
+                            Git ignores things you might need
+                            PHP namespace resolution might conflict
+                            Artisan commands may detect the wrong bootstrap files
+                            Web server could accidentally route requests to the wrong app
+                            Storage/logs/seeding paths overlap
+                            Deployment tools become confused
+                        </blockquote>
+                    </span>
+                </p>
+            </div>
+	    </div>
+
+		<div class="card">
+            <div class="card-header">
+                <p>Prompt:             
+                    <span class="answer_required" style="color: #f1f5f9;">
+                        Component code provided:
+                        ```
+                            <label {{ $attributes -> merge(['class' => 'block text-sm/6 font-medium text-gray-900']) }}>{{ $slot }}</label>
+                        ```
+                        using this as a blade component, it states that it must have a control (assuming a "for=")... 
+                        but this is pulled from outside, what is the issue. ADVISE DO NOT FIX
+                    </span>
+                </p>
+                <p>Date: 28-11-2025 </p>
+            </div>
+            <div class="card-body">
+                <p>
+                    <span class="answer_required">
+                        Problem - this is a flaw with accessability. Not a technical error.
+                        THINK: screen reader compatability
+                    </span>
+                </p>
+            </div>
+	    </div>
+
+		<div class="card">
+            <div class="card-header">
+                <p>Prompt:             
+                    <span class="answer_required" style="color: #f1f5f9;">
+                        ```
+                            @props(['name'])
+                            @error($name)
+                                <div class="mt-2 text-sm text-red-600 font-semibold mt-1">{{ $message }}</div>
+                            @enderror
+                        ```
+                        blade comp
+                        when would i use name, and when would i use for
+                    </span>
+                </p>
+                <p>Date: 28-11-2025 </p>
+            </div>
+            <div class="card-body">
+                <p>
+                    <span class="answer_required">
+                        name > used to check for validation errors
+                        `Example: error messages, binding old input values, form handling`
+                        for > relates to labels   
+
+                        inputs do not have a for attribute.
+                        labels do.
+                    </span>
+                </p>
+            </div>
+	    </div>
+    
+        <!-- Example Card - Copy and Paste for each Prompt-->
+		<div class="card">
+            <div class="card-header">
+                <p>Prompt:             
+                    <span class="answer_required" style="color: #f1f5f9;">
+                        promptHERE
+                    </span>
+                </p>
+                <p>Date: dd-mm-yyyy </p>
+            </div>
+            <div class="card-body">
+                <p>
+                    <span class="answer_required">
+                        answerHERE
+                    </span>
+                </p>
+            </div>
+	    </div>
+        <!-- End Example Card -->
+
+</section>
+</body>
+</html>
